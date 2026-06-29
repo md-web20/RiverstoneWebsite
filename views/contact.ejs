@@ -1,0 +1,420 @@
+<%- include('partials/header') %>
+
+<style>
+    /* গ্লোবাল কন্টাক্ট পেজ স্টাইল */
+    .contact-page-wrapper {
+        background-color: #0a0a0a;
+        color: white;
+        min-height: 100vh;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        padding-bottom: 80px;
+        position: relative;
+    }
+
+    /* হিরো সেকশন */
+    .contact-hero {
+        position: relative;
+        width: 100%;
+        height: 45vh;
+        background: 
+            linear-gradient(to top, #0a0a0a 0%, transparent 100%),
+            linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)),
+            url('/images/PUZZLE MASTER!.png') center/cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .hero-content { margin-top: 80px; }
+
+    .hero-title {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 3.5rem;
+        color: #00ffcc;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+    }
+
+    /* কন্টাক্ট ফর্ম ও ইনফো সেকশন */
+    .contact-container {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 50px;
+        padding: 50px 10%;
+    }
+
+    .contact-form-box, .contact-info-box {
+        background: #111;
+        border: 1px solid #222;
+        padding: 40px;
+        border-radius: 15px;
+    }
+
+    .contact-form-box h3, .contact-info-box h3 {
+        font-family: 'Orbitron', sans-serif;
+        color: #00ffcc;
+        margin-bottom: 25px;
+        text-transform: uppercase;
+    }
+
+    .input-group { margin-bottom: 20px; }
+
+    .input-group label {
+        display: block;
+        color: #aaa;
+        font-size: 0.9rem;
+        margin-bottom: 8px;
+    }
+
+    .input-group input, .input-group textarea {
+        width: 100%;
+        background: #0a0a0a;
+        border: 1px solid #333;
+        padding: 12px;
+        color: white;
+        border-radius: 6px;
+        font-size: 1rem;
+        transition: 0.3s;
+    }
+
+    .input-group input:focus, .input-group textarea:focus {
+        border-color: #00ffcc;
+        outline: none;
+        box-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
+    }
+
+    .btn-submit {
+        background: #00ffcc;
+        color: #000;
+        border: none;
+        padding: 12px 30px;
+        font-size: 1rem;
+        font-weight: bold;
+        border-radius: 6px;
+        cursor: pointer;
+        text-transform: uppercase;
+        transition: 0.3s;
+        width: 100%;
+    }
+
+    .btn-submit:hover {
+        background: #fff;
+        box-shadow: 0 0 15px #00ffcc;
+    }
+
+    /* নতুন পেজের লিংক বাটনগুলোর স্টাইল */
+    .links-section {
+        padding: 40px 10%;
+        background: #0e0e0e;
+        border-top: 1px solid #1a1a1a;
+        border-bottom: 1px solid #1a1a1a;
+        text-align: center;
+    }
+
+    .links-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .link-btn {
+        background: transparent;
+        color: #aaa;
+        border: 2px solid #333;
+        padding: 12px 30px;
+        border-radius: 30px;
+        cursor: pointer;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: bold;
+        text-decoration: none;
+        transition: 0.3s;
+        display: inline-block;
+    }
+
+    .link-btn:hover {
+        border-color: #00ffcc;
+        color: #00ffcc;
+        background: rgba(0, 255, 204, 0.05);
+        box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+
+    /* FAQ সেকশন */
+    .faq-section {
+        padding: 80px 10%;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .faq-item {
+        background: #111;
+        border: 1px solid #222;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        overflow: hidden;
+    }
+
+    .faq-question {
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .faq-question:hover { color: #00ffcc; }
+
+    .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+        background: #0d0d0d;
+    }
+
+    .faq-answer-inner {
+        padding: 20px;
+        color: #aaa;
+        line-height: 1.7;
+        border-top: 1px solid #1a1a1a;
+    }
+
+    .faq-icon {
+        transition: transform 0.3s ease;
+        color: #00ffcc;
+        font-size: 1.2rem;
+    }
+
+    /* নেওন সাকসেস নোটিফিকেশন পপ-আপ */
+    .neon-popup {
+        display: none; 
+        position: fixed; 
+        top: 100px; /* হেডারের নিচে */
+        right: 30px; 
+        background: #111; 
+        border: 2px solid #00ffcc; 
+        box-shadow: 0 0 15px #00ffcc; 
+        padding: 15px 25px; 
+        border-radius: 8px; 
+        z-index: 1000; 
+        transition: opacity 0.5s ease;
+        align-items: center; 
+        gap: 12px;
+        opacity: 0;
+    }
+
+    @media (max-width: 992px) {
+        .contact-container { grid-template-columns: 1fr; }
+        .links-buttons { flex-direction: column; align-items: stretch; }
+    }
+</style>
+
+<div class="contact-page-wrapper">
+    <!-- ১. হিরো সেকশন -->
+    <div class="contact-hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Get In Touch</h1>
+            <p style="color: #aaa; font-size: 1.1rem;">Have a question? We would love to hear from you.</p>
+        </div>
+    </div>
+
+    <!-- ২. কন্টাক্ট ফর্ম এবং ইনফো -->
+    <section class="contact-container">
+        <div class="contact-form-box">
+            <h3>Send Message</h3>
+            
+            <form id="contactForm">
+                <div class="input-group">
+                    <label>Your Name</label>
+                    <!-- name="name" যুক্ত করা হয়েছে -->
+                    <input type="text" id="senderName" name="name" required placeholder="John Doe">
+                </div>
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <!-- name="email" যুক্ত করা হয়েছে -->
+                    <input type="email" id="senderEmail" name="email" required placeholder="john@example.com">
+                </div>
+                <div class="input-group">
+                    <label>Message</label>
+                    <!-- name="message" যুক্ত করা হয়েছে -->
+                    <textarea rows="5" id="senderMessage" name="message" required placeholder="Write your message here..."></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Send Message</button>
+            </form>
+        </div>
+
+        <div class="contact-info-box" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <h3>Riverstone Studios</h3>
+                <p style="color: #aaa; line-height: 1.7; margin-bottom: 25px;">
+                    <strong>Riverstone Games & Studios</strong> is a premier indie game development studio and custom software development agency. We specialize in building highly optimized casual mobile games, modern SaaS solutions, and futuristic web development. 
+                </p>
+                <div style="margin-bottom: 15px; color: #ccc;">
+                    <strong style="color: #00ffcc;">Email:</strong> contact@riverstonegames.com
+                </div>
+                <div style="margin-bottom: 15px; color: #ccc;">
+                    <strong style="color: #00ffcc;">Location:</strong> Dhaka, Bangladesh (Serving Clients Globally)
+                </div>
+            </div>
+            <div style="border-top: 1px solid #222; padding-top: 20px; margin-top: 20px;">
+                <p style="color: #555; font-size: 0.85rem;">
+                    SEO Keywords: Indie Game Studio, Unity Game Developers, Custom Web Development, SaaS Bookkeeping software, Dhaka Tech Agency.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ৩. পৃথক পেজের নেভিগেশন লিংক বাটন -->
+    <section class="links-section">
+        <div class="links-buttons">
+            <a href="/about" class="link-btn">About Us</a>
+            <a href="/privacy" class="link-btn">Privacy Policy</a>
+            <a href="/terms" class="link-btn">Terms & Conditions</a>
+        </div>
+    </section>
+
+    <!-- ৪. ২৫টি এসইও ফ্রেন্ডলি এফএকিউ (FAQ) -->
+    <section class="faq-section">
+        <h2 style="font-family: 'Orbitron', sans-serif; text-align: center; margin-bottom: 40px; text-transform: uppercase;">Frequently Asked <span>Questions</span></h2>
+        <div id="dynamic-faq-container">
+            <!-- JS দিয়ে ২৫টি FAQ এখানে রেন্ডার হবে -->
+        </div>
+    </section>
+
+    <!-- ৫. নেওন সাকসেস নোটিফিকেশন পপ-আপ -->
+    <div id="successPopup" class="neon-popup">
+        <span style="color:#00ffcc; font-size:1.3rem; font-weight:bold;">✓</span>
+        <span style="color:white; font-weight:bold; font-family: 'Orbitron', sans-serif;">Message Sent Successfully!</span>
+    </div>
+</div>
+
+<script>
+    // ========================================================
+    // ২৫টি অতি গুরুত্বপূর্ণ এসইও অপ্টিমাইজড এফএকিউ (FAQ) ডাটা
+    // ========================================================
+    const faqData = [
+        { id: 1, q: "What is Riverstone Games?", a: "Riverstone Games is an indie game development studio and custom software agency specializing in casual mobile puzzles, strategic board games, and cloud-connected web applications." },
+        { id: 2, q: "Where is Riverstone Games located?", a: "Our development studio is based in Dhaka, Bangladesh, but we operate globally, delivering digital services and applications to clients and players across the world." },
+        { id: 3, q: "What core services do you offer?", a: "We offer end-to-end 2D/3D Mobile Game Development, Custom Web Application Development, Enterprise SaaS Solutions, UI/UX Prototyping, and Backend Database Integration." },
+        { id: 4, q: "What platforms do you develop games for?", a: "We primarily build mobile games optimized for Android (Google Play, Amazon Appstore) and iOS (Apple App Store), alongside web-based HTML5/WebGL game experiences." },
+        { id: 5, q: "Which game engine and programming languages do you use?", a: "We build our gaming experiences using the Unity Engine with C# (Object-Oriented Programming). We optimize graphics utilizing Unity's Universal Render Pipeline (URP)." },
+        { id: 6, q: "Are your mobile games free to play?", a: "Yes, most of our casual games like 'Tube Bubble Sort' are free-to-download on Google Play Store, supported by optimized ad monetization and non-intrusive in-app purchases." },
+        { id: 7, q: "How do you handle ad monetization in your games?", a: "We integrate Google AdMob Mediation (connecting networks like Meta Audience Network, Unity Ads, and Chartboost) to ensure maximum fill rate and clean user experience." },
+        { id: 8, q: "Can your games be played offline?", a: "Many of our casual puzzle games feature offline support, caching level and progress data locally. Online connection is only needed for leaderboards and cloud synchronization." },
+        { id: 9, q: "How can I report a bug or request support for a game?", a: "If you encounter any glitches, you can use our 'Send Message' form above, or write directly to support@riverstonegames.com with screenshots of the issue." },
+        { id: 10, q: "Do you develop custom websites for other studios or businesses?", a: "Yes! We specialize in crafting high-performance, modern agency websites, portfolio platforms, and interactive user interfaces tailored to your brand's digital identity." },
+        { id: 11, q: "What is your web development tech stack?", a: "Our web architecture leverages Node.js, Express, and EJS for secure server-side rendering, React.js (Vite) and Tailwind CSS for frontend, and Firebase/Firestore for database management." },
+        { id: 12, q: "What is MemoMama?", a: "MemoMama is our custom-built, professional-grade Micro-SaaS Business OS. It bridges the gap between manual bookkeeping and complex ERP systems with dynamic billing and logistics API integrations." },
+        { id: 13, q: "Is MemoMama safe for storing financial data?", a: "Absolutely. MemoMama is engineered with a Privacy-First architecture. Data is stored securely in Firebase Firestore using 256-bit encryption and strict session tokens." },
+        { id: 14, q: "Can MemoMama be integrated with local courier services?", a: "Yes, MemoMama features logistics automation with one-click REST API integration with major local courier networks (e.g., Steadfast, Pathao, RedX) for automatic parcel booking." },
+        { id: 15, q: "How does Riverstone optimize websites for Google SEO?", a: "We use server-side rendering (SSR) via Express and EJS, dynamic meta routing with React Router, semantic HTML structure, compressed WebP assets, and clean schema markup to guarantee excellent Google SEO crawling." },
+        { id: 16, q: "Do you provide post-launch maintenance for web apps?", a: "Yes, we offer flexible post-launch support and maintenance SLA contracts to ensure your SaaS products, databases, and APIs stay secure and fully operational." },
+        { id: 17, q: "What database systems do you prefer for SaaS products?", a: "We prefer Firebase Firestore for real-time web applications, MongoDB for highly scalable unstructured document stores, and PostgreSQL for robust relational transaction models." },
+        { id: 18, q: "How does Riverstone safeguard player and user privacy?", a: "We implement strict local storage encryption, avoid tracking unnecessary cookies, and adhere to global safety guidelines, ensuring a clean and secure digital workspace." },
+        { id: 19, q: "Are your games and applications compliant with GDPR & CCPA?", a: "Yes. Our cloud synchronization backend features GDPR compliance, allowing players anonymous authentication (silently) and options to request total data deletion." },
+        { id: 20, q: "Do you use cookies on your website?", a: "We only use essential functional cookies to maintain user session tokens and security settings. We do not track or sell your browsing history to third-party ad networks." },
+        { id: 21, q: "How can I request total deletion of my data from your database?", a: "You can send an email to privacy@riverstonegames.com from your registered email address, and our admin team will wipe your records within 72 business hours." },
+        { id: 22, q: "How can we hire Riverstone Games for a custom project?", a: "Simply send your project brief through the contact form above, or drop us an email at contact@riverstonegames.com. Our technical team will respond with a preliminary proposal within 2 business days." },
+        { id: 23, q: "What is your project estimation and billing process?", a: "We break projects down into agile milestones. Billing is securely managed via platform invoices, with payments split across milestone sign-offs, guaranteeing transparency." },
+        { id: 24, q: "Do you offer internships or career opportunities?", a: "We are always looking for passionate indie developers and UI designers. Keep an eye on our LinkedIn profile or send your CV directly to careers@riverstonegames.com." },
+        { id: 25, q: "How can we stay updated on your latest game releases?", a: "You can bookmark our 'Games' tab, follow our developer handles on Google Play, and subscribe to our newsletter for exclusive announcements of upcoming projects." }
+    ];
+
+    // ========================================================
+    // ১. এফএকিউ রেন্ডারিং ইঞ্জিন
+    // ========================================================
+    function renderFAQs() {
+        const container = document.getElementById('dynamic-faq-container');
+        container.innerHTML = "";
+
+        faqData.forEach(item => {
+            container.innerHTML += `
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(${item.id})">
+                        <span>${item.q}</span>
+                        <span class="faq-icon" id="faq-icon-${item.id}">+</span>
+                    </div>
+                    <div class="faq-answer" id="faq-ans-${item.id}">
+                        <div class="faq-answer-inner">
+                            ${item.a}
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    function toggleFAQ(id) {
+        const answer = document.getElementById('faq-ans-' + id);
+        const icon = document.getElementById('faq-icon-' + id);
+
+        if (answer.style.maxHeight) {
+            answer.style.maxHeight = null;
+            icon.style.transform = "rotate(0deg)";
+            icon.innerHTML = "+";
+        } else {
+            answer.style.maxHeight = answer.scrollHeight + "px";
+            icon.style.transform = "rotate(45deg)";
+            icon.innerHTML = "×";
+        }
+    }
+
+    // ========================================================
+    // ২. কন্টাক্ট ফর্ম সাবমিট ইন্টারসেপ্টর (বাস্তবে জিমেইলে ইমেইল পাঠানোর জন্য)
+    // ========================================================
+    const contactForm = document.getElementById('contactForm');
+    const successPopup = document.getElementById('successPopup');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // ব্রাউজার ক্র্যাশ/রিলোড হওয়া থামাবে
+
+            const formData = new FormData(contactForm);
+            
+            // ইমেইল সার্ভিস কনফিগারেশন (আপনার আসল কী বসানো হয়েছে)
+            formData.append('access_key', '8ed9b0bc-9172-4154-9bde-460a06679709'); 
+            formData.append('subject', 'New Client Inquiry from Riverstone Studios Website');
+
+            // ব্যাকগ্রাউন্ডে ইমেইল পাঠানো শুরু হবে (AJAX রিকোয়েস্ট)
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // নোটিফিকেশন পপ-আপ শো করবে
+                    successPopup.style.display = 'flex';
+                    
+                    // অ্যানিমেশন ট্রিগার করার জন্য ছোট ট্রিক
+                    setTimeout(() => {
+                        successPopup.style.opacity = '1';
+                    }, 50);
+
+                    // ৩ সেকেন্ড পর পপ-আপটি আলতো করে গায়েব হয়ে যাবে
+                    setTimeout(() => {
+                        successPopup.style.opacity = '0';
+                        setTimeout(() => {
+                            successPopup.style.display = 'none';
+                        }, 500);
+                    }, 3000);
+
+                    // ফর্মটি খালি (Reset) করে দেবে
+                    contactForm.reset();
+                } else {
+                    alert("Submission failed. Please check your network and try again.");
+                }
+            })
+            .catch(error => {
+                console.error("Error sending email:", error);
+                alert("Failed to send message. Please check your internet connection.");
+            });
+        });
+    }
+
+    // স্ক্রিপ্ট রান করা
+    renderFAQs();
+</script>
+
+<%- include('partials/footer') %>

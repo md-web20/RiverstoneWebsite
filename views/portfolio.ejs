@@ -1,0 +1,253 @@
+<%- include('partials/header') %>
+
+<section class="portfolio-section">
+    <h1 id="portfolio-title" class="section-title" style="font-size: 4rem; letter-spacing: 10px;">OUR WORK</h1>
+    <p style="color: #94a3b8; max-width: 600px; margin: 0 auto 50px;">A showcase of precision, performance, and futuristic digital craftsmanship.</p>
+
+    <div class="portfolio-grid" id="project-list">
+        <!-- কার্ডগুলো এখানে লোড হবে -->
+    </div>
+</section>
+
+<!-- প্রজেক্ট ডিটেইল পপ-আপ (Modal) -->
+<div id="projectModal" class="modal-overlay">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <div id="modal-body">
+            <!-- ডাটা এখানে ডাইনামিকভাবে আসবে -->
+        </div>
+    </div>
+</div>
+
+
+<!-- ৩. JavaScript অংশ: যেটা কার্ড তৈরি করবে -->
+<script>
+    // প্রতিটি প্রজেক্টের জন্য এক একটি আলাদা "খণ্ড বা ব্লক"
+    const projects = [
+        // ১ নম্বর ব্লক: আপনার এই গেম
+        {
+            id: 1,
+        title: "Tube Bubble Sort: Ball Color Puzzle",
+        shortDesc: "Developed with Unity 6, Tube Bubble Sort is a vibrant ASMR logic puzzle game featuring seasonal live events, a global leaderboard system, and deep customization. Published across Google Play, Amazon, and Itch.io, it showcases advanced UI/UX design and robust backend integration using PlayFab.",
+        longDesc: `
+         <strong>PROJECT OVERVIEW:</strong><br>
+          Tube Bubble Sort is a high-quality color-sorting puzzle designed to offer both a mental challenge and a relaxing experience. The project emphasizes scalability, featuring over 4000+ hand-crafted levels and a dynamic "Live-Ops" system that hosts seasonal events like the Monsoon Mystery and Mango Festival.<br><br>
+
+          <strong>KEY TECHNICAL FEATURES:</strong>
+         <ul style="margin-top: 10px; margin-bottom: 20px; padding-left: 20px; line-height: 1.6;">
+         <li><strong>Dynamic Live Events:</strong> Integrated a time-based and milestone-based event system to increase user retention.</li>
+          <li><strong>Backend Integration:</strong> Leveraged PlayFab for secure data storage, unique 10-char player IDs, and real-time global leaderboards.</li>
+           <li><strong>Professional Leaderboard UI:</strong> Built a custom "My Rank" view that allows players to track their position relative to their immediate rivals.</li>
+          <li><strong>Advanced Monetization:</strong> Implemented AdMob Mediation (Meta, Unity Ads, Chartboost) for optimized revenue and a smooth user experience.</li>
+          <li><strong>Customization Engine:</strong> A ScriptableObject-driven shop system allowing players to unlock 100+ unique bubble skins and themes.</li>
+         <li><strong>Performance Optimization:</strong> Optimized for mobile devices using Unity 6, ensuring smooth 60 FPS gameplay even with 4000+ levels.</li>
+        </ul>
+
+        <strong>TECHNICAL STACK:</strong>
+        <ul style="margin-top: 10px; margin-bottom: 20px; padding-left: 20px; line-height: 1.6;">
+        <li><strong>Engine:</strong> Unity 6 (6000.3.15f1)</li>
+        <li><strong>Language:</strong> C#</li>
+        <li><strong>Backend:</strong> PlayFab (CloudScript & Statistics)</li>
+        <li><strong>Monetization:</strong> Google Mobile Ads (Mediation)</li>
+        <li><strong>Platforms:</strong> Android (Google Play, Amazon Appstore, Itch.io)</li>
+        </ul>
+
+        <strong>DEVELOPMENT JOURNEY:</strong><br>
+        This project served as a comprehensive exercise in managing a full-cycle game production—from initial concept and UI design (AI-assisted) to publishing and post-launch maintenance. It demonstrates my ability to integrate complex third-party APIs while maintaining a clean, user-friendly interface.
+        `,
+        thumbnail: "/images/SIMPLE & FUN PUZZLES!.png", 
+        videoUrl: "https://www.youtube.com/embed/yT62nnT4ecc", // এখানে এমবেড লিংকটি দিন
+        tools: ["UNITY", "C#", "BLENDER", "POST-PROCESSING"],
+            screenshots: ["/images/PLAY YOUR STYLE!.png", "/images/PUZZLE MASTER!.png"]
+        },
+
+        // ২ নম্বর ব্লক: আরেকটি গেম (উদাহরণ হিসেবে)
+        {
+            title: "Jigsaw Photo Puzzle Arena",
+        shortDesc: "A premium, cloud-connected 2D mobile Jigsaw Puzzle game built in Unity. Features a procedural run-time image-slicing engine, PlayFab global leaderboards, AdMob monetization, and an innovative custom photo puzzle-sharing portal powered by Firebase and offline local caching.",
+        longDesc: `
+            <strong>PROJECT OVERVIEW: JIGSAW PHOTO PUZZLE ARENA</strong><br><br>
+            
+            Jigsaw Photo Puzzle Arena is a highly polished, feature-rich 2D casual mobile puzzle game built using Unity and C# (OOP). The project showcases advanced implementation of procedural mesh/texture slicing, cloud-based data synchronization, cross-scene data persistence, and optimal mobile performance.<br><br>
+            
+            Designed with a modern, modular architecture, the game features a fully playable loop of 120 dynamic levels across 20 unique arenas, global leaderboards, ad monetization, and a viral custom challenge-sharing portal.<br><br>
+            
+            <strong>TECHNICAL ACCOMPLISHMENTS & FEATURE ARCHITECTURE:</strong><br><br>
+            
+            <strong>1. Procedural Run-Time Slicing & Precision Snapping:</strong><br>
+            - Developed a dynamic texture slicing engine that calculates coordinates in real-time, slicing any imported 2D image into precise grid sizes (from 3x3 up to 8x8) using float-precision clamping formulas to prevent visual clipping.<br>
+            - Implemented a robust Screen-Space Distance Snapping algorithm that converts world positions to absolute screen pixels, guaranteeing resolution-independent, pixel-perfect puzzle piece snapping.<br><br>
+            
+            <strong>2. "My Puzzle" - Cloud Sharing & Local Storage Caching:</strong><br>
+            - Integrated Unity Native Gallery to allow players to select custom images from their mobile storage.<br>
+            - Built a custom REST API uploader that converts selected textures to optimized JPG bytes, uploads them to a free cloud hosting service, and registers a 6-digit challenge code on Google Firebase Realtime Database.<br>
+            - Implemented an Offline Local Caching system using "Application.persistentDataPath" to save downloaded custom puzzles on the device.<br><br>
+            
+            <strong>3. Cloud Backend & Global Leaderboard:</strong><br>
+            - Implemented silent, anonymous player authentication using Microsoft PlayFab SDK.<br>
+            - Created a dynamic 12-character alphanumeric name generator on first-time launch.<br>
+            - Implemented a custom "Base + Speed Bonus" Trophy System.<br><br>
+            
+            <strong>4. Advanced UI/UX & Responsive Layouts:</strong><br>
+            - Designed a single-active-state navigation panel that automatically activates/deactivates UI screens to optimize draw calls.<br>
+            - Created a premium, custom Horizontal Snapping Scroll-Rect for grid size selection.<br><br>
+            
+            <strong>5. Optimization and Monetization:</strong><br>
+            - Integrated Google AdMob for Banner, Timed Interstitials, and Rewarded Ads.<br>
+            - Optimized the build pipeline using ASTC texture compression and IL2CPP code stripping, reducing Android build size from 340 MB to under 45 MB.<br><br>
+            
+            <strong>TECH STACK:</strong><br>
+            Unity (2D URP), C#, Microsoft PlayFab, Google Firebase (JSON/REST), Google AdMob SDK.
+            `,
+            
+            thumbnail: "/images/SIMPLE & FUN PUZZLES!.png", 
+            videoUrl: "", 
+            tools: ["UNITY", "C#", "PLAYFAB", "FIREBASE"],
+        thumbnail: "/images/Gp.png", 
+        videoUrl: "https://www.youtube.com/embed/gzieZt4RD2s", // এখানে এমবেড লিংকটি দিন
+        tools: ["UNITY", "C#", "BLENDER", "POST-PROCESSING"],
+            screenshots: ["/images/SA1.png", "/images/SA4.png"]
+        },
+
+        // ৩ নম্বর ব্লক: আপনার ওয়েবসাইট প্রজেক্ট
+        {
+            id: 3,
+            category: "web",
+            title: "MemoMama: A Multi-Lingual Micro-SaaS Business OS",
+            shortDesc: "A comprehensive Business Management SaaS built with React and Firebase. It features smart invoicing, real-time inventory synchronization, dynamic financial analytics, and automated courier integration across 21+ languages.",
+            longDesc: `
+<strong>THE VISION:</strong><br>
+MemoMama is a professional-grade Micro-SaaS designed to bridge the gap between traditional manual bookkeeping and high-end enterprise management systems. Developed with a <strong>"Privacy-First"</strong> architecture, it allows entrepreneurs to manage their entire business lifecycle—from billing to shipping—without the need for complex accounting knowledge.<br><br>
+
+<strong>KEY TECHNOLOGICAL & BUSINESS MODULES:</strong>
+<ul style="margin-top: 10px; margin-bottom: 20px; padding-left: 20px; line-height: 1.6;">
+    <li><strong>Smart Invoicing:</strong> Generate custom-branded digital memos in seconds, supporting dynamic taxes (VAT), discounts, and 21+ regional languages.</li>
+    <li><strong>Automated Inventory:</strong> Real-time stock tracking with automatic deduction upon sale, preventing operational bottlenecks.</li>
+    <li><strong>Financial Intelligence:</strong> Comprehensive Revenue vs. Expense dashboard providing live Net Profit insights.</li>
+    <li><strong>Logistics Automation:</strong> Seamless integration with courier APIs (Steadfast, Pathao, RedX) for one-click parcel booking.</li>
+    <li><strong>Customer CRM:</strong> Built-in intelligence to detect returning customers and global blacklist alerts for return parcel prevention.</li>
+    <li><strong>Cloud-Sync & Security:</strong> Powered by Firebase with 256-bit encryption and secure session management for multi-device access.</li>
+</ul>
+
+<strong>TECHNICAL STACK USED:</strong>
+<ul style="margin-top: 10px; margin-bottom: 20px; padding-left: 20px; line-height: 1.6;">
+    <li><strong>Frontend:</strong> React.js (Vite), Tailwind CSS (for premium UI/UX), Lucide Icons.</li>
+    <li><strong>Backend & Database:</strong> Firebase Firestore (Real-time DB), Firebase Authentication.</li>
+    <li><strong>State Management:</strong> React Hooks (useState, useEffect, useRef).</li>
+    <li><strong>Routing:</strong> React Router DOM v6 (Subdirectory-based multi-language routing).</li>
+    <li><strong>Payments:</strong> LemonSqueezy (Merchant of Record) Integration.</li>
+    <li><strong>Logistics:</strong> Integration with multiple Courier REST APIs.</li>
+    <li><strong>DevOps:</strong> Firebase Hosting with custom domain configuration.</li>
+</ul>
+
+<strong>CHALLENGES FACED & SOLUTIONS:</strong>
+<ul style="margin-top: 10px; margin-bottom: 20px; padding-left: 20px; line-height: 1.6;">
+    <li><strong>Challenge - Complex Global SEO Routing:</strong> Implementing a URL structure like domain.com/bn/products instead of simple state-based views was tricky.<br>
+    <span style="color: #00ffcc;">✓</span> <strong>Solution:</strong> Integrated dynamic React Router paths to ensure each language version is indexable by Google Bots.</li>
+    
+    <li style="margin-top: 8px;"><strong>Challenge - Independent Currency Logic:</strong> Users wanted to use English but transact in Taka (৳).<br>
+    <span style="color: #00ffcc;">✓</span> <strong>Solution:</strong> Developed a custom "Regional Settings" engine that decoupled language from currency symbols across the entire application.</li>
+    
+    <li style="margin-top: 8px;"><strong>Challenge - Data Integrity in Firestore:</strong> Handling atomic stock deductions (increment/decrement) when data was originally stored as Strings.<br>
+    <span style="color: #00ffcc;">✓</span> <strong>Solution:</strong> Refactored the entire database schema to use strict Number types and implemented Firebase increment function to ensure accurate stock counts even under high concurrent sales.</li>
+    
+    <li style="margin-top: 8px;"><strong>Challenge - Mobile Optimization:</strong> Tables looked cluttered on small screens.<br>
+    <span style="color: #00ffcc;">✓</span> <strong>Solution:</strong> Re-engineered the UI using a "Card-First" approach for mobile while maintaining "Table-View" for desktop.</li>
+</ul>
+
+<strong>OUTCOME:</strong><br>
+MemoMama is now a fully functional, production-ready SaaS tool that helps small business owners save an average of <strong>10-15 hours per week</strong> on manual data entry and courier booking.
+`,
+            thumbnail: "/images/Screenshot_6.png",
+            videoUrl: "", // ভিডিও না থাকলে খালি রাখুন
+            tools: ["NODE.JS", "JavaScript (ES6+)", "React.js (Vite)", "Tailwind CSS", "EXPRESS", "EJS", "GSAP", "React Router DOM v6"],
+            screenshots: ["/images/Screenshot_7.png", "/images/Screenshot_8.png"]
+        }
+        
+        // এভাবেই আপনি ৪, ৫, ৬ নম্বর ব্লক যোগ করতে পারবেন...
+    ];
+
+    const projectContainer = document.getElementById('project-list');
+
+    // ডাটা থেকে অটোমেটিক কার্ড তৈরি করার লজিক
+    function renderProjects() {
+        if(!projectContainer) return; // সেফটি চেক
+        projectContainer.innerHTML = ""; // আগের কন্টেন্ট পরিষ্কার করা
+        projects.forEach((p, index) => {
+            projectContainer.innerHTML += `
+                <div class="project-card" onclick="openModal(${index})">
+                    <div class="project-img-container">
+                        <img src="${p.thumbnail}" alt="${p.title}">
+                    </div>
+                    <div class="project-info">
+                        <h3>${p.title}</h3>
+                        <p>${p.shortDesc}</p>
+                        <div class="tech-tags">
+                            ${p.tools.slice(0, 3).map(t => `<span class="tech-tag">${t}</span>`).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    // পপ-আপ ওপেন করার লজিক
+    function openModal(index) {
+        const p = projects[index];
+        const modal = document.getElementById('projectModal');
+        const modalBody = document.getElementById('modal-body');
+
+        modalBody.innerHTML = `
+            <div class="modal-grid" style="align-items: flex-start;"> 
+                
+                <!-- বাম দিকের ভিডিও/ইমেজ এরিয়া (এটি স্ক্রল করার সময় স্থির থাকবে) -->
+                <div class="modal-video-area" style="position: sticky; top: 0;">
+                    ${p.videoUrl ? `<iframe src="${p.videoUrl}" frameborder="0" allowfullscreen style="width:100%; aspect-ratio:16/9; border-radius:10px;"></iframe>` : `<img src="${p.thumbnail}" style="width:100%; border-radius:10px;">`}
+                </div>
+                
+                <!-- ডান দিকের টেক্সট এরিয়া (এটি স্বাভাবিকভাবে স্ক্রল হবে) -->
+                <div class="modal-text-area">
+                    <h2 class="orbitron">${p.title}</h2>
+                    <div class="modal-tools">
+                        <strong>Used Tools:</strong> ${p.tools.map(t => `<span class="tech-tag">${t}</span>`).join('')}
+                    </div>
+                    <p class="modal-desc">${p.longDesc}</p>
+                    
+                    <div class="screenshot-gallery">
+                        <h4>Project Screenshots</h4>
+                        <div class="ss-grid">
+                            ${p.screenshots.map(ss => `<img src="${ss}" alt="screenshot">`).join('')}
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        `;
+        modal.style.display = "flex";
+        document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+        document.getElementById('projectModal').style.display = "none";
+        document.getElementById('modal-body').innerHTML = "";
+        document.body.style.overflow = "auto";
+    }
+
+    // টাইটেল এনিমেশন (আগের মতোই)
+    function animatePortfolioTitle(id) {
+        const el = document.getElementById(id);
+        if(!el) return; // সেফটি চেক
+        const text = el.innerText;
+        el.innerHTML = "";
+        text.split('').forEach((char, i) => {
+            const span = document.createElement('span');
+            span.innerHTML = char === ' ' ? '&nbsp;' : char;
+            span.className = 'char';
+            el.appendChild(span);
+            setTimeout(() => { span.style.opacity = "1"; span.style.transform = "translateY(0)"; }, i * 80);
+        });
+    }
+
+    renderProjects(); // কার্ডগুলো লোড করা
+    animatePortfolioTitle('portfolio-title'); // টাইটেল এনিমেট করা
+</script>

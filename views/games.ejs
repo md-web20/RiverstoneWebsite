@@ -1,0 +1,384 @@
+<%- include('partials/header') %>
+
+<style>
+    /* গেমস পেজের গ্লোবাল স্টাইল */
+    .games-page-wrapper {
+        background-color: #0a0a0a;
+        color: white;
+        min-height: 100vh;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        padding-bottom: 60px;
+    }
+
+    /* ১. হিরো সেকশন (Featured Game) */
+    .featured-hero {
+        position: relative;
+        width: 100%;
+        height: 80vh; /* হাইট একটু বাড়িয়ে দিলাম যাতে নিচে পর্যাপ্ত জায়গা থাকে */
+        display: flex;
+        align-items: center;
+        padding: 0 10%;
+        background-size: cover !important;
+        background-position: center top !important; /* ব্যাকগ্রাউন্ড ইমেজ একটু নিচে নামিয়ে আনবে */
+    }
+
+    .hero-content {
+        max-width: 650px;
+        z-index: 2;
+        margin-top: 80px; /* এই লাইনটি আপনার লেখাকে হেডারের নিচ থেকে সেফ দূরত্বে নামিয়ে আনবে */
+    }
+
+    .badge-new {
+        background-color: #00ffcc;
+        color: #000;
+        padding: 6px 15px;
+        border-radius: 20px;
+        font-weight: 800;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 20px;
+        display: inline-block;
+    }
+
+    .hero-title {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 4rem;
+        font-weight: 900;
+        line-height: 1.1;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+    }
+
+    .hero-desc {
+        font-size: 1.2rem;
+        color: #ddd;
+        margin-bottom: 30px;
+        line-height: 1.6;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 20px;
+    }
+
+    .btn-download {
+        background: #00ffcc;
+        color: #000;
+        padding: 15px 35px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        text-decoration: none;
+        border-radius: 8px;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .btn-download:hover {
+        background: #fff;
+        box-shadow: 0 0 20px #00ffcc;
+        transform: translateY(-3px);
+    }
+
+    .btn-trailer {
+        background: transparent;
+        color: #fff;
+        padding: 15px 35px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        text-decoration: none;
+        border-radius: 8px;
+        border: 2px solid #fff;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+    }
+
+    .btn-trailer:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: #00ffcc;
+        color: #00ffcc;
+    }
+
+    /* ২. গেম লাইব্রেরি সেকশন */
+    .game-library {
+        padding: 60px 10%;
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .section-header h2 {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 2.8rem;
+        color: white;
+        text-transform: uppercase;
+    }
+    
+    .section-header h2 span {
+        color: #00ffcc;
+    }
+
+    .games-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 40px;
+    }
+
+    .game-card {
+        background: #151515;
+        border-radius: 15px;
+        overflow: hidden;
+        border: 1px solid #222;
+        transition: all 0.4s ease;
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+    }
+
+    .game-card:hover {
+        transform: translateY(-10px);
+        border-color: #00ffcc;
+        box-shadow: 0 15px 30px rgba(0, 255, 204, 0.15);
+    }
+
+    .card-img-wrapper {
+        position: relative;
+        height: 220px;
+        overflow: hidden;
+    }
+
+    .card-img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+    }
+
+    .game-card:hover .card-img-wrapper img {
+        transform: scale(1.1);
+    }
+
+    .genre-tag {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: rgba(0, 0, 0, 0.7);
+        color: #00ffcc;
+        padding: 5px 12px;
+        border-radius: 5px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        border: 1px solid #00ffcc;
+        backdrop-filter: blur(5px);
+    }
+
+    .card-content {
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    .card-content h3 {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1.6rem;
+        margin: 0 0 10px 0;
+        color: white;
+    }
+
+    .card-content p {
+        color: #aaa;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        margin-bottom: 25px;
+        flex-grow: 1;
+    }
+
+    .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 1px solid #333;
+        padding-top: 15px;
+    }
+
+    .platforms {
+        color: #888;
+        font-size: 0.9rem;
+        font-weight: bold;
+    }
+
+    .play-link {
+        color: #00ffcc;
+        text-decoration: none;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 0.95rem;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        transition: 0.3s;
+    }
+
+    .play-link:hover {
+        text-shadow: 0 0 10px #00ffcc;
+    }
+
+    @media (max-width: 768px) {
+        .hero-title { font-size: 2.8rem; }
+        .action-buttons { flex-direction: column; }
+        .btn-download, .btn-trailer { text-align: center; justify-content: center; }
+        .featured-hero { padding: 0 5%; text-align: center; }
+        .hero-content { margin: 0 auto; }
+        .game-library { padding: 50px 5%; }
+    }
+</style>
+
+<div class="games-page-wrapper">
+    <!-- ১. হিরো সেকশন: ডাইনামিক্যালি জাভাস্ক্রিপ্ট দিয়ে আসবে -->
+    <header id="dynamic-hero" class="featured-hero">
+        <!-- Content injected by JS -->
+    </header>
+
+    <!-- ২. গেম লাইব্রেরি -->
+    <section class="game-library">
+        <div class="section-header">
+            <h2>Explore Our <span>Catalog</span></h2>
+            <p style="color: #888; font-size: 1.1rem; margin-top: 10px;">Immerse yourself in our handcrafted digital worlds.</p>
+        </div>
+        
+        <!-- গ্রিড: ডাইনামিক্যালি জাভাস্ক্রিপ্ট দিয়ে আসবে -->
+        <div id="dynamic-games-grid" class="games-grid">
+            <!-- Cards injected by JS -->
+        </div>
+    </section>
+</div>
+
+<script>
+    // ========================================================
+    // আপনার গেমের ডাটা ব্লক: এখান থেকেই সব গেম কন্ট্রোল করবেন
+    // ========================================================
+    const gamesList = [
+        {
+            id: 1,
+            title: "Jigsaw Photo Arena",
+            shortDesc: "A highly polished multiplayer jigsaw game. Slice your own photos and challenge players globally on the leaderboard!",
+            thumbnail: "/images/GP.png",
+            genre: "Strategy Puzzle",
+            platforms: "Android / Web",
+            playText: "PLAY NOW ➔",
+            
+            // নিচে আপনার আসল প্লে স্টোর এবং ইউটিউব ট্রেইলারের লিংক বসিয়ে দেবেন
+            downloadLink: "#", 
+            trailerLink: "https://www.youtube.com/watch?v=gzieZt4RD2s", 
+            
+            isHero: true, // "true" দিলে এই গেমটি বড় ব্যানারে শো করবে
+            isComingSoon: false
+        },
+        {
+            id: 2,
+            title: "Tube Bubble Sort",
+            shortDesc: "A relaxing yet addictive color puzzle game. Arrange the colors in tubes and unlock exclusive seasonal themes.",
+            thumbnail: "/images/SIMPLE & FUN PUZZLES!.png",
+            genre: "Casual Puzzle",
+            platforms: "Android / iOS",
+            playText: "PLAY NOW ➔",
+            
+            // এই গেমের জন্য আলাদা প্লে স্টোর এবং ইউটিউব ট্রেইলারের লিংক
+            downloadLink: "https://play.google.com/store/apps/details?id=com.RiverstoneGames.TubeBubbleSort", 
+            trailerLink: "https://youtu.be/yT62nnT4ecc", 
+            
+            isHero: false,
+            isComingSoon: false
+        },
+        {
+            id: 3,
+            title: "Space Invader 2024",
+            shortDesc: "High-octane space shooter with stunning neon graphics. Brace yourself for wave after wave of intense alien combat.",
+            thumbnail: "/images/coming-soon.png", 
+            genre: "In Development",
+            platforms: "PC / Console",
+            playText: "COMING SOON",
+            
+            // গেমটি এখনো তৈরি হচ্ছে, তাই লিংক খালি থাকবে
+            downloadLink: "#", 
+            trailerLink: "#", 
+            
+            isHero: false,
+            isComingSoon: true 
+        }
+    ];
+
+    // ========================================================
+    // ডাটা রেন্ডার করার লজিক (হাত দেওয়ার দরকার নেই)
+    // ========================================================
+    
+    // ১. হিরো ব্যানার রেন্ডার করা
+    function renderHero() {
+        const heroSection = document.getElementById('dynamic-hero');
+        const featuredGame = gamesList.find(game => game.isHero === true) || gamesList[0]; 
+
+        // ব্যাকগ্রাউন্ড ইমেজ ডাইনামিক করা
+        heroSection.style.background = `linear-gradient(to top, #0a0a0a 0%, transparent 100%), linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 100%), url('${featuredGame.thumbnail}')`;
+
+        heroSection.innerHTML = `
+            <div class="hero-content">
+                <span class="badge-new">New Release</span>
+                <h1 class="hero-title">${featuredGame.title}</h1>
+                <p class="hero-desc">${featuredGame.shortDesc}</p>
+                <div class="action-buttons">
+                    <!-- target="_blank" ব্যবহারের ফলে আপনার ওয়েবসাইট বন্ধ না হয়ে নতুন ট্যাবে লিংকটি খুলবে -->
+                    <a href="${featuredGame.downloadLink}" target="_blank" class="btn-download">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                        Download Free
+                    </a>
+                    <a href="${featuredGame.trailerLink}" target="_blank" class="btn-trailer">Watch Trailer</a>
+                </div>
+            </div>
+        `;
+    }
+
+    // ২. গেম লাইব্রেরি (Catalog) রেন্ডার করা
+    function renderGamesGrid() {
+        const gridContainer = document.getElementById('dynamic-games-grid');
+        gridContainer.innerHTML = ""; 
+
+        gamesList.forEach(game => {
+            const opacityStyle = game.isComingSoon ? 'style="opacity: 0.7;"' : '';
+            const imgStyle = game.isComingSoon ? 'style="filter: grayscale(100%);"' : '';
+            const tagStyle = game.isComingSoon ? 'style="background: #333; color: white; border-color: #555;"' : '';
+            const linkStyle = game.isComingSoon ? 'style="color: #aaa;"' : '';
+
+            // নিচের কার্ডের "PLAY NOW ➔" লিংকেও অটোমেটিক ডাইনামিক ডাউনলোড লিংক সেট হবে
+            const finalPlayLink = game.isComingSoon ? '#' : game.downloadLink;
+
+            gridContainer.innerHTML += `
+                <div class="game-card" ${opacityStyle}>
+                    <div class="card-img-wrapper">
+                        <span class="genre-tag" ${tagStyle}>${game.genre}</span>
+                        <img src="${game.thumbnail}" alt="${game.title}" ${imgStyle}>
+                    </div>
+                    <div class="card-content">
+                        <h3>${game.title}</h3>
+                        <p>${game.shortDesc}</p>
+                        <div class="card-footer">
+                            <span class="platforms">${game.platforms}</span>
+                            <a href="${finalPlayLink}" target="_blank" class="play-link" ${linkStyle}>${game.playText}</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    // স্ক্রিপ্ট রান করা
+    renderHero();
+    renderGamesGrid();
+</script>
+<%- include('partials/header') %>

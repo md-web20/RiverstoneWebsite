@@ -1,0 +1,346 @@
+<%- include('partials/header') %>
+
+<style>
+    /* সাইবারনেটিক অথোরিটি পেজ স্টাইল */
+    .auth-page-wrapper {
+        background-color: #060b13; /* আপনার প্রিয় ডিপ নেভি ব্লু */
+        color: white;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        padding-top: 100px;
+        padding-bottom: 60px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* সাইবার গ্রিড ওভারলে */
+    .auth-page-wrapper::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: 
+            linear-gradient(rgba(0, 153, 255, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 153, 255, 0.03) 1px, transparent 1px);
+        background-size: 40px 40px;
+        z-index: 1;
+    }
+
+    /* গ্লোয়িং অথোরিটি কার্ড (গ্লাসমরফিজম ইফেক্ট সহ) */
+    .auth-card {
+        background: rgba(17, 26, 38, 0.6);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid #1a2638;
+        box-shadow: 0 0 30px rgba(0, 153, 255, 0.15);
+        padding: 40px;
+        border-radius: 20px;
+        width: 100%;
+        max-width: 480px;
+        z-index: 2;
+        transition: all 0.3s ease;
+    }
+
+    .auth-card:hover {
+        border-color: #3399ff;
+        box-shadow: 0 0 40px rgba(0, 153, 255, 0.25);
+    }
+
+    /* সাইন ইন এবং সাইন আপ সুইচ ট্যাব */
+    .auth-tabs {
+        display: flex;
+        border-bottom: 2px solid #1a2638;
+        margin-bottom: 30px;
+    }
+
+    .auth-tab-btn {
+        flex: 1;
+        background: transparent;
+        color: #888;
+        border: none;
+        padding: 15px 0;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1.1rem;
+        font-weight: bold;
+        cursor: pointer;
+        text-transform: uppercase;
+        transition: 0.3s;
+        text-align: center;
+    }
+
+    .auth-tab-btn.active, .auth-tab-btn:hover {
+        color: #00ffcc;
+    }
+
+    .auth-tab-btn.active {
+        border-bottom: 3px solid #00ffcc;
+        margin-bottom: -2.5px;
+    }
+
+    /* ইনপুট ফিল্ড ও বাটনসমূহ */
+    .auth-group {
+        margin-bottom: 22px;
+    }
+
+    .auth-group label {
+        display: block;
+        color: #aaa;
+        font-size: 0.85rem;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .auth-group input {
+        width: 100%;
+        background: #060b13;
+        border: 1px solid #1a2638;
+        padding: 12px 15px;
+        color: white;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: 0.3s;
+    }
+
+    .auth-group input:focus {
+        border-color: #00ffcc;
+        outline: none;
+        box-shadow: 0 0 12px rgba(0, 255, 204, 0.2);
+    }
+
+    /* চেকবক্স ও পাসওয়ার্ড রিসেট */
+    .auth-options {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.9rem;
+        color: #aaa;
+        margin-bottom: 25px;
+    }
+
+    .auth-options a {
+        color: #3399ff;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+    .auth-options a:hover {
+        color: #00ffcc;
+        text-shadow: 0 0 8px rgba(0, 255, 204, 0.3);
+    }
+
+    .btn-auth-submit {
+        background: #00ffcc;
+        color: #000;
+        border: none;
+        padding: 14px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        border-radius: 8px;
+        cursor: pointer;
+        text-transform: uppercase;
+        width: 100%;
+        font-family: 'Orbitron', sans-serif;
+        transition: 0.3s;
+        margin-bottom: 20px;
+    }
+
+    .btn-auth-submit:hover {
+        background: #fff;
+        box-shadow: 0 0 20px #00ffcc;
+    }
+
+    /* সোশ্যাল লগইন ভাইব (গেমারদের জন্য) */
+    .social-auth {
+        border-top: 1px solid #1a2638;
+        padding-top: 20px;
+        text-align: center;
+    }
+
+    .social-auth p {
+        color: #666;
+        font-size: 0.85rem;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+    }
+
+    .social-buttons {
+        display: flex;
+        gap: 15px;
+    }
+
+    .btn-social {
+        flex: 1;
+        background: #111;
+        color: white;
+        border: 1px solid #222;
+        padding: 10px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 0.9rem;
+        transition: 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .btn-social:hover {
+        border-color: #3399ff;
+        background: rgba(0, 153, 255, 0.05);
+    }
+
+    /* নোটিফিকেশন পপ-আপ */
+    .neon-popup {
+        display: none; 
+        position: fixed; 
+        top: 100px; 
+        right: 30px; 
+        background: #111; 
+        border: 2px solid #00ffcc; 
+        box-shadow: 0 0 15px #00ffcc; 
+        padding: 15px 25px; 
+        border-radius: 8px; 
+        z-index: 1000; 
+        transition: opacity 0.5s ease;
+        align-items: center; 
+        gap: 12px;
+        opacity: 0;
+    }
+</style>
+
+<div class="auth-page-wrapper">
+    
+    <div class="auth-card">
+        <!-- ১. সুইচ ট্যাব -->
+        <div class="auth-tabs">
+            <button class="auth-tab-btn active" onclick="toggleAuth('signin')">Sign In</button>
+            <button class="auth-tab-btn" onclick="toggleAuth('signup')">Sign Up</button>
+        </div>
+
+        <!-- ২. সাইন ইন ফর্ম -->
+        <form id="signInForm">
+            <div class="auth-group">
+                <label>Email Address</label>
+                <input type="email" required placeholder="john@example.com">
+            </div>
+            <div class="auth-group">
+                <label>Password</label>
+                <input type="password" required placeholder="••••••••">
+            </div>
+            <div class="auth-options">
+                <label style="cursor: pointer; display: flex; align-items: center; gap: 5px;">
+                    <input type="checkbox" style="width: auto; cursor: pointer;"> Remember me
+                </label>
+                <a href="#">Forgot Password?</a>
+            </div>
+            <button type="submit" class="btn-auth-submit">Enter Portal</button>
+        </form>
+
+        <!-- ৩. সাইন আপ ফর্ম (ডিফল্ট হাইড থাকবে) -->
+        <form id="signUpForm" style="display: none;">
+            <div class="auth-group">
+                <label>Full Name</label>
+                <input type="text" required placeholder="John Doe">
+            </div>
+            <div class="auth-group">
+                <label>Email Address</label>
+                <input type="email" required placeholder="john@example.com">
+            </div>
+            <div class="auth-group">
+                <label>Create Password</label>
+                <input type="password" required placeholder="••••••••">
+            </div>
+            <div class="auth-options">
+                <label style="cursor: pointer; display: flex; align-items: center; gap: 5px;">
+                    <input type="checkbox" required style="width: auto; cursor: pointer;"> I agree to Terms & Privacy
+                </label>
+            </div>
+            <button type="submit" class="btn-auth-submit">Create Account</button>
+        </form>
+
+        <!-- ৪. সোশ্যাল লগইন (গেমার ভাইব দেওয়ার জন্য) -->
+        <div class="social-auth">
+            <p>Or Connect With</p>
+            <div class="social-buttons">
+                <button class="btn-social">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
+                    Discord
+                </button>
+                <button class="btn-social">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>
+                    Google
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ৫. সাকসেস নোটিফিকেশন পপ-আপ -->
+    <div id="authPopup" class="neon-popup">
+        <span style="color:#00ffcc; font-size:1.3rem; font-weight:bold;">✓</span>
+        <span id="popupText" style="color:white; font-weight:bold; font-family: 'Orbitron', sans-serif;">Login Successful!</span>
+    </div>
+
+</div>
+
+<script>
+    // ১. সাইন ইন এবং সাইন আপ ফর্ম টগল করার লজিক
+    function toggleAuth(mode) {
+        const signInForm = document.getElementById('signInForm');
+        const signUpForm = document.getElementById('signUpForm');
+        const tabs = document.querySelectorAll('.auth-tab-btn');
+
+        // সব বাটন থেকে একটিভ ক্লাস রিমুভ করা
+        tabs.forEach(tab => tab.classList.remove('active'));
+
+        if (mode === 'signin') {
+            signInForm.style.display = 'block';
+            signUpForm.style.display = 'none';
+            tabs[0].classList.add('active');
+        } else {
+            signInForm.style.display = 'none';
+            signUpForm.style.display = 'block';
+            tabs[1].classList.add('active');
+        }
+    }
+
+    // ২. লোকালহোস্টে টেস্ট সাবমিশন ইন্টারসেপ্টর (পপ-আপ অ্যানিমেশন সহ)
+    const signInForm = document.getElementById('signInForm');
+    const signUpForm = document.getElementById('signUpForm');
+    const authPopup = document.getElementById('authPopup');
+    const popupText = document.getElementById('popupText');
+
+    function triggerSuccessPopup(text) {
+        popupText.innerText = text;
+        authPopup.style.display = 'flex';
+        setTimeout(() => { authPopup.style.opacity = '1'; }, 50);
+
+        setTimeout(() => {
+            authPopup.style.opacity = '0';
+            setTimeout(() => { authPopup.style.display = 'none'; }, 500);
+        }, 3000);
+    }
+
+    if (signInForm) {
+        signInForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            triggerSuccessPopup("Access Granted. Portal Loading!");
+            signInForm.reset();
+        });
+    }
+
+    if (signUpForm) {
+        signUpForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            triggerSuccessPopup("Account Registered Successfully!");
+            signUpForm.reset();
+            // অটোমেটিক সাইন ইন ট্যাবে নিয়ে যাবে
+            setTimeout(() => { toggleAuth('signin'); }, 1500);
+        });
+    }
+</script>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,258 @@
+<%- include('partials/header') %>
+
+<style>
+    /* গ্লোবাল স্টাইল */
+    .legal-page-wrapper { 
+        background-color: #050505; 
+        color: white; 
+        min-height: 100vh; 
+        padding-bottom: 100px; 
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        position: relative; /* ব্যাক বাটনের পজিশন ঠিক রাখার জন্য */
+    }
+
+    /* পিউর সিএসএস সাইবারপাঙ্ক গেমিং গ্রিড হিরো */
+    .legal-hero { 
+        height: 45vh; 
+        background: 
+            radial-gradient(circle at 50% 50%, rgba(0, 255, 204, 0.15), transparent 60%),
+            #050505;
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        text-align: center; 
+        border-bottom: 2px solid #00ffcc; 
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* সাইবারনেটিক গ্লোয়িং গ্রিড ওভারলে */
+    .legal-hero::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: 
+            linear-gradient(rgba(0, 255, 204, 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 255, 204, 0.05) 1px, transparent 1px);
+        background-size: 40px 40px;
+        z-index: 1;
+    }
+
+    /* গ্লোয়িং ব্যাক বাটন (Back Button) - সায়ান নেয়ন গ্লো সহ */
+    .btn-back-legal {
+        position: absolute;
+        top: 100px; /* হেডার থেকে একটু নিচে */
+        left: 10%;
+        background: transparent;
+        color: #00ffcc;
+        border: 1px solid #1a1a1a;
+        padding: 10px 22px;
+        border-radius: 25px;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.9rem;
+        font-weight: bold;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.3s ease;
+        z-index: 10;
+        box-shadow: 0 0 10px rgba(0, 255, 204, 0.05);
+    }
+
+    .btn-back-legal:hover {
+        border-color: #00ffcc;
+        color: #fff;
+        background: rgba(0, 255, 204, 0.1);
+        box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
+        transform: translateX(-5px); /* হোভার করলে আলতো করে বামে সরবে */
+    }
+
+    .legal-title { 
+        font-family: 'Orbitron', sans-serif; 
+        font-size: 3.5rem; 
+        color: #00ffcc; 
+        margin-top: 80px; 
+        text-transform: uppercase; 
+        letter-spacing: 2px;
+        z-index: 2;
+        text-shadow: 0 0 20px rgba(0, 255, 204, 0.6);
+    }
+
+    /* কন্টেন্ট লেআউট */
+    .legal-content { 
+        max-width: 950px; 
+        margin: 60px auto 0 auto; 
+        padding: 0 5%; 
+        line-height: 1.9; 
+        color: #ccc; 
+    }
+
+    /* হেডলাইনের প্রিমিয়াম ডেকোরেশন */
+    .legal-content h2 { 
+        color: #fff; 
+        font-family: 'Orbitron', sans-serif; 
+        font-size: 1.8rem;
+        margin-top: 45px; 
+        margin-bottom: 20px; 
+        border-bottom: 1px solid #1a1a1a;
+        padding-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    /* চ্যাপ্টার বা সেকশনের টাইটেল গ্লো */
+    .section-num {
+        color: #00ffcc;
+        font-size: 1.3rem;
+        font-weight: bold;
+    }
+
+    .legal-content p { 
+        margin-bottom: 25px; 
+        text-align: justify; 
+        font-size: 1.05rem;
+    }
+
+    .sub-section {
+        background: #0b0b0b;
+        border: 1px solid #1a1a1a;
+        padding: 25px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        transition: 0.3s;
+    }
+
+    .sub-section:hover {
+        border-color: #00ffcc;
+        background: #0f0f0f;
+    }
+
+    .sub-section h3 {
+        font-family: 'Orbitron', sans-serif;
+        color: #00ffcc;
+        margin-top: 0;
+        margin-bottom: 15px;
+        font-size: 1.25rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    /* হাইলাইট করা ইম্পর্ট্যান্ট কী-ওয়ার্ড */
+    .highlight-text {
+        color: #00ffcc;
+        font-weight: bold;
+    }
+
+    /* টেকনিক্যাল লিস্ট স্টাইল */
+    .tech-list {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
+    .tech-list li {
+        margin-bottom: 12px;
+        position: relative;
+        padding-left: 20px;
+    }
+
+    .tech-list li::before {
+        content: '❖';
+        position: absolute;
+        left: 0;
+        color: #00ffcc;
+    }
+</style>
+
+<div class="legal-page-wrapper">
+    
+    <!-- ব্যাক বাটন (Back to Contact) -->
+    <a href="/contact" class="btn-back-legal">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        BACK
+    </a>
+
+    <!-- ১. হিরো সেকশন: ডাইনামিক পিউর সিএসএস গ্রিড ও গ্লো -->
+    <div class="legal-hero">
+        <h1 class="legal-title">About Us 🚀</h1>
+    </div>
+
+    <!-- ২. বিস্তারিত ও এসইও ফ্রেন্ডলি কন্টেন্ট -->
+    <div class="legal-content">
+        
+        <h2><span class="section-num">CHAPTER 01</span> Our Genesis & Vision 🎮</h2>
+        <p><strong>Riverstone Games & Studios</strong> is not just another development agency; we are a dedicated collective of passionate software architects, game designers, and digital artisans. Founded with a vision to redefine casual mobile entertainment and robust business infrastructures, we strive to deliver pixel-perfect digital experiences that bridge the gap between imagination and execution.</p>
+        
+        <p>Operating from Dhaka, Bangladesh, we develop high-fidelity digital products for an international audience. Our hybrid operational model allows us to seamlessly transition between the dynamic gaming world and the highly structured, secure enterprise software ecosystem. We don't just build software; we engineer virtual experiences that keep users engaged, optimized, and productive.</p>
+
+        <h2><span class="section-num">CHAPTER 02</span> Our Core Pillars of Engineering 🛡️</h2>
+        <p>Our operational framework is built upon three non-negotiable architectural pillars that guide every decision, from initial wireframing to server hosting:</p>
+
+        <!-- সাব-সেকশন ১ -->
+        <div class="sub-section">
+            <h3>💻 Precision Architecture</h3>
+            <p>Every single line of code we write is optimized for maximum readability, scalability, and performance. We strictly adhere to clean coding conventions, object-oriented principles, and modular designs, ensuring that our systems can scale seamlessly without architectural friction or latency buildup.</p>
+        </div>
+
+        <!-- সাব-সেকশন ২ -->
+        <div class="sub-section">
+            <h3>📱 Low-End Device Optimization</h3>
+            <p>We firmly believe that high-quality digital experiences should be accessible to everyone. Our mobile games are rigorously profiled to run at a flawless <span class="highlight-text">60 Frames Per Second (FPS)</span> even on low-end hardware, utilizing advanced memory management, static batching, and dynamic texture streaming pipelines.</p>
+        </div>
+
+        <!-- সাব-সেকশন ৩ -->
+        <div class="sub-section">
+            <h3>🔒 Privacy-First Architecture</h3>
+            <p>User security is at the heart of our software ecosystem. From anonymous authentication in our casual games to encrypted data persistence in our fintech software systems, we protect sensitive user metrics against unauthorized leaks, data selling, and tracking.</p>
+        </div>
+
+        <h2><span class="section-num">CHAPTER 03</span> Detailed Tech Stack & Philosophy ⚙️</h2>
+        <p>To deliver uncompromising quality across our platforms, we utilize a highly curated, cutting-edge software stack, customized for specific performance bottlenecks:</p>
+
+        <div class="sub-section">
+            <h3>🎮 Mobile Game Development Stack</h3>
+            <ul class="tech-list">
+                <li><strong>Engine:</strong> Unity 6 (6000.3.15f1) for cross-platform rendering efficiency.</li>
+                <li><strong>Language:</strong> C# (OOP, Async/Await asynchronous programming patterns, Coroutines).</li>
+                <li><strong>Render Pipeline:</strong> Universal Render Pipeline (URP) customized for dynamic lighting and low-draw-call performance.</li>
+                <li><strong>Backend & Live-Ops:</strong> Microsoft PlayFab (CloudScript & dynamic stats) and Firebase Realtime Database.</li>
+            </ul>
+        </div>
+
+        <div class="sub-section">
+            <h3>🌐 Web & SaaS Software Stack</h3>
+            <ul class="tech-list">
+                <li><strong>Frontend Frameworks:</strong> React.js (Vite environment) and server-side rendered EJS templates.</li>
+                <li><strong>CSS Architecture:</strong> Tailwind CSS for responsive layouts and premium glassmorphism interfaces.</li>
+                <li><strong>Backend Engines:</strong> Node.js paired with Express for high-concurrency routing and secure API endpoints.</li>
+                <li><strong>Database Systems:</strong> Firebase Firestore (NoSQL real-time storage), MongoDB, and PostgreSQL (for ACID compliance).</li>
+                <li><strong>Animation Systems:</strong> GSAP (GreenSock Animation Platform) for smooth micro-animations.</li>
+            </ul>
+        </div>
+
+        <h2><span class="section-num">CHAPTER 04</span> Our Flagship Digital Products 🏆</h2>
+        <p>Our multi-disciplinary workflow allows us to publish completely distinct digital ecosystems, serving both gamers looking for relaxation and entrepreneurs looking to automate their bookkeeping:</p>
+
+        <p><strong>1. Casual Game Ecosystem:</strong> Our mobile catalog, headlined by <span class="highlight-text">Tube Bubble Sort</span> and <span class="highlight-text">Jigsaw Photo Arena</span>, highlights our ability to translate classic casual mechanics into tactile, modern loops. We develop dynamic, server-connected level systems, advanced real-time slicing calculations, and global leaderboards to keep our active player base engaged and connected.</p>
+
+        <p><strong>2. Enterprise SaaS Ecosystem:</strong> Represented by our premier business software, <span class="highlight-text">MemoMama</span>, our web applications automate intensive operational tasks. By integrating dynamic multi-lingual routing, secure session tokens, and local courier APIs, we help small businesses automate inventory tracking and logistics with a single-click interface.</p>
+
+        <h2><span class="section-num">CHAPTER 05</span> Development Lifecycle & Quality Assurance 🔄</h2>
+        <p>At Riverstone Games, our development process follows a highly optimized, agile lifecycle to ensure that the final product meets the highest industrial standards before it reaches your device:</p>
+
+        <p><strong>Step 1: Ideation & Dynamic Prototyping:</strong> We start by breaking down the target audience and defining the core loop. For web products, we build precise user-flow wireframes. For games, we construct physical grey-box prototypes to test if the game physics feel tactile and engaging.</p>
+
+        <p><strong>Step 2: Strict Agile Development:</strong> Our team codes in rapid, iterative sprints. By utilizing Git version control, we continuously compile and test our systems. This prevents large build bottlenecks and ensures that we maintain a highly transparent pipeline throughout the project lifecycle.</p>
+
+        <p><strong>Step 3: Extreme Profiling & Optimization:</strong> We do not publish unoptimized code. In Unity, we use the Memory Profiler to track memory leaks. In web development, we audit our code using Google Lighthouse to guarantee that our sites maintain a <span class="highlight-text">99% mobile performance score</span>, maximizing Google SEO crawling.</p>
+
+        <h2><span class="section-num">CHAPTER 06</span> Our Global Vision & Impact 🌐</h2>
+        <p>Our vision spans far beyond Dhaka. From Bangladesh, we aim to establish a premier, highly authoritative software brand that serves active players and automated enterprises on every continent. We aim to contribute extensively to the local tech community, championing open-source architectures, mentoring young indie developers, and crafting digital products that are secure, private, and exceptionally fast.</p>
+        
+        <p>Thank you for exploring our ecosystem. Whether you are here to relax with our color-sorting levels or to automate your entire brick-and-mortar business, we welcome you to the Riverstone Studios family. Let's build the future together, one pixel at a time.</p>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

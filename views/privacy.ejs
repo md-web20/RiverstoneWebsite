@@ -1,0 +1,262 @@
+<%- include('partials/header') %>
+
+<style>
+    /* গ্লোবাল নেভি-ডার্ক স্পেস থিম */
+    .legal-page-wrapper { 
+        background-color: #060b13; 
+        color: white; 
+        min-height: 100vh; 
+        padding-bottom: 100px; 
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        position: relative;
+    }
+
+    /* পিউর সিএসএস সাইবারনেটিক নেভি ব্লু গ্রিড হিরো */
+    .legal-hero { 
+        height: 45vh; 
+        background: 
+            radial-gradient(circle at 50% 50%, rgba(0, 153, 255, 0.15), transparent 60%),
+            #060b13;
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        text-align: center; 
+        border-bottom: 2px solid #0099ff; 
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* ইলেকট্রিক ব্লু সাইবার গ্রিড ওভারলে */
+    .legal-hero::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: 
+            linear-gradient(rgba(0, 153, 255, 0.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 153, 255, 0.04) 1px, transparent 1px);
+        background-size: 40px 40px;
+        z-index: 1;
+    }
+
+    /* গ্লোয়িং ব্যাক বাটন (Back Button) */
+    .btn-back-legal {
+        position: absolute;
+        top: 100px; /* হেডার থেকে একটু নিচে */
+        left: 10%;
+        background: transparent;
+        color: #3399ff;
+        border: 1px solid #1a2638;
+        padding: 10px 22px;
+        border-radius: 25px;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.9rem;
+        font-weight: bold;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.3s ease;
+        z-index: 10;
+        box-shadow: 0 0 10px rgba(0, 153, 255, 0.05);
+    }
+
+    .btn-back-legal:hover {
+        border-color: #3399ff;
+        color: #fff;
+        background: rgba(0, 153, 255, 0.1);
+        box-shadow: 0 0 15px rgba(0, 153, 255, 0.4);
+        transform: translateX(-5px); /* হোভার করলে আলতো করে বামে সরবে */
+    }
+
+    .legal-title { 
+        font-family: 'Orbitron', sans-serif; 
+        font-size: 3.5rem; 
+        color: #3399ff; 
+        margin-top: 80px; 
+        text-transform: uppercase; 
+        letter-spacing: 2px;
+        z-index: 2;
+        text-shadow: 0 0 20px rgba(0, 153, 255, 0.6);
+    }
+
+    /* কন্টেন্ট লেআউট */
+    .legal-content { 
+        max-width: 950px; 
+        margin: 60px auto 0 auto; 
+        padding: 0 5%; 
+        line-height: 1.95; 
+        color: #ccc; 
+    }
+
+    /* হেডলাইনের প্রিমিয়াম ডেকোরেশন */
+    .legal-content h2 { 
+        color: #fff; 
+        font-family: 'Orbitron', sans-serif; 
+        font-size: 1.8rem;
+        margin-top: 50px; 
+        margin-bottom: 25px; 
+        border-bottom: 1px solid #1a2638;
+        padding-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .section-num {
+        color: #3399ff;
+        font-size: 1.3rem;
+        font-weight: bold;
+    }
+
+    .legal-content p { 
+        margin-bottom: 25px; 
+        text-align: justify; 
+        font-size: 1.05rem;
+    }
+
+    .sub-section {
+        background: #09111c;
+        border: 1px solid #1a2638;
+        padding: 30px;
+        border-radius: 12px;
+        margin-bottom: 35px;
+        transition: 0.3s;
+    }
+
+    .sub-section:hover {
+        border-color: #3399ff;
+        background: #0d1a2b;
+        box-shadow: 0 5px 20px rgba(0, 153, 255, 0.05);
+    }
+
+    .sub-section h3 {
+        font-family: 'Orbitron', sans-serif;
+        color: #3399ff;
+        margin-top: 0;
+        margin-bottom: 15px;
+        font-size: 1.3rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .highlight-text {
+        color: #3399ff;
+        font-weight: bold;
+    }
+
+    .tech-list {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
+    .tech-list li {
+        margin-bottom: 15px;
+        position: relative;
+        padding-left: 25px;
+        line-height: 1.7;
+    }
+
+    .tech-list li::before {
+        content: '✦';
+        position: absolute;
+        left: 0;
+        color: #3399ff;
+    }
+</style>
+
+<div class="legal-page-wrapper">
+    
+    <!-- ব্যাক বাটন (Back to Contact) -->
+    <a href="/contact" class="btn-back-legal">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        BACK
+    </a>
+
+    <!-- ১. হিরো সেকশন -->
+    <div class="legal-hero">
+        <h1 class="legal-title">Privacy Policy 🛡️</h1>
+    </div>
+
+    <!-- ২. বিস্তারিত ও এসইও কমপ্লায়েন্ট আইনি কন্টেন্ট -->
+    <div class="legal-content">
+        
+        <h2><span class="section-num">SECTION 01</span> Comprehensive Scope & General Consent 🌐</h2>
+        <p>At <strong>Riverstone Games & Studios</strong>, we recognize the supreme importance of protecting the privacy of our visitors, players, and cloud enterprise clients. This Privacy Policy serves as a legally binding document detailing how our operational frameworks collect, record, process, and protect your digital footprint across our entire software ecosystem. This includes our standalone casual mobile games (e.g., <em>Tube Bubble Sort</em>, <em>Jigsaw Photo Arena</em>) and our business SaaS operating environments (e.g., <em>MemoMama</em>).</p>
+        
+        <p>By downloading, playing, testing, subscribing, or interacting with any software service distributed under the Riverstone Studios brand, you explicitly and unconditionally consent to the collection, storage, and architectural processing of your metadata as detailed in this policy. If you disagree with any portion of this document, you must discontinue using our services and request immediate account termination.</p>
+
+        <h2><span class="section-num">SECTION 02</span> Information We Collect & Process 🔍</h2>
+        <p>We collect two primary categories of information: Personal Information (which directly identifies you) and Non-Personal/Device Information (which identifies your hardware parameters). This data collection is designed to run silently to maintain a fluid, optimized, and secure user experience across all form factors:</p>
+
+        <!-- সাব-সেকশন ১ -->
+        <div class="sub-section">
+            <h3>📱 Device Metadata, Analytics & Hardware Caching (Games)</h3>
+            <p>To operate our real-time global leaderboards, dynamic live-ops campaigns, and online persistence systems, we compile device-specific telemetry data. This includes your <span class="highlight-text">PlayFab Anonymous Player Token</span>, device hardware profile (CPU, GPU, RAM capacity), Operating System build, Internet Protocol (IP) address, approximate geographical region, and Mobile Advertising Identifiers (Google AAID or Apple IDFA). These metrics are processed as encrypted strings and are completely isolated from your physical real-world identity.</p>
+        </div>
+
+        <!-- সাব-সেকশন ২ -->
+        <div class="sub-section">
+            <h3>💼 SaaS Enterprise Databases & Bookkeeping Data (Web)</h3>
+            <p>For cloud-connected software systems like MemoMama, we collect structural business metrics that you voluntarily upload. This includes customer registration profiles, inventory lists, transaction ledgers, tax specifications, and logistics API tokens. This data is handled via strict database isolation rules, meaning your business records are completely invisible to other tenants, search engines, or third-party brokers.</p>
+        </div>
+
+        <!-- সাব-সেকশন ৩ -->
+        <div class="sub-section">
+            <h3>📧 Voluntary Communications & Technical Inquiries</h3>
+            <p>When you fill out our contact form or send a message directly to our server at <strong style="color: #3399ff;">contact@riverstonegames.com</strong>, we record your name, registered email address, and the complete text details of your message. We process these metrics strictly to resolve your technical inquiries, debug operational issues, and provide live customer support. This data is deleted once the support ticket is resolved.</p>
+        </div>
+
+        <h2><span class="section-num">SECTION 03</span> Detailed Purposes of Data Processing ⚙️</h2>
+        <p>We do not collect data arbitrarily. Every single metric recorded by our servers is processed to maintain transactional integrity, performance profiling, or monetization consistency:</p>
+
+        <ul class="tech-list" style="color: #ccc; font-size: 1.05rem; margin-bottom: 30px;">
+            <li><strong>Session & Progress Caching:</strong> Saving your game level progression, skin unlocks, and custom themes on PlayFab nodes so you do not lose your scores if you change devices.</li>
+            <li><strong>Global Leaderboard Integrity:</strong> Verifying player statistics dynamically on our backend server before rendering them on our high-fidelity Orbitron UI leaderboard panels to prevent cheating.</li>
+            <li><strong>Non-Intrusive Ad Personalization:</strong> Google AdMob SDK utilizes your mobile ad identifier to match relevant campaigns, ensuring you do not see highly repetitive or age-inappropriate ad content.</li>
+            <li><strong>Atomic Ledger Calculations:</strong> Processing real-time Firestore database queries to ensure that MemoMama’s automated inventory deduction works smoothly under concurrent transactions.</li>
+        </ul>
+
+        <h2><span class="section-num">SECTION 04</span> Enterprise Security & Encryption Architecture 🔒</h2>
+        <p>We believe that user trust is built upon uncompromising security. Therefore, we utilize industry-grade, bank-level encryption standards across our cloud infrastructure:</p>
+
+        <p>All client-server communications are encrypted using <span class="highlight-text">256-bit Secure Socket Layers (SSL/TLS)</span> in transit. For our web platforms, we write strict Firebase Firestore Security Rules that verify the JSON Web Token (JWT) of the client before permitting database operations. For mobile games, we isolate backend analytics within Microsoft PlayFab’s secure virtual private networks (VPN), preventing external database injection, cross-site scripting (XSS), or malicious account hijacking.</p>
+
+        <h2><span class="section-num">SECTION 05</span> Global Data Rights (GDPR & CCPA Compliant) 🛡️</h2>
+        <p>We respect international privacy frameworks. If you are accessing our games or apps from the European Union (under GDPR) or California (under CCPA), you possess robust statutory rights regarding your digital data:</p>
+
+        <div class="sub-section">
+            <h3>🇪🇺 European Union (GDPR) Data Rights</h3>
+            <p>Under GDPR, you have the right to inspect all personal metadata we store, request immediate rectification of incomplete databases, request complete data portability (downloading your data as a clean JSON file), and request the complete erasure of your accounts (the <strong>"Right to be Forgotten"</strong>). We comply with all erasure requests without undue delay.</p>
+        </div>
+
+        <div class="sub-section">
+            <h3>🇺🇸 California (CCPA) Privacy Rights</h3>
+            <p>Under CCPA, California residents have the right to request full disclosure of the categories and specific pieces of personal metrics collected. You also have the right to demand that your personal metrics not be sold to third-party ad networks. Riverstone Games does not sell, trade, or rent user metrics to data brokers under any circumstances.</p>
+        </div>
+
+        <h2><span class="section-num">SECTION 06</span> Children's Privacy Protections (COPPA) 👶</h2>
+        <p>We are fully committed to protecting children’s privacy online, adhering strictly to the Children's Online Privacy Protection Act (COPPA) and family policy guidelines of Google Play:</p>
+        
+        <p>Our casual puzzle games are open to players of all ages, but we do not knowingly collect, compile, or request personal metrics from children under the age of 13. If you are a parent or guardian and discover that your child has bypassed age gates and sent personal details to our servers, please contact us immediately at <strong style="color: #3399ff;">contact@riverstonegames.com</strong>. We will prioritize purging their records from our active databases within 24 hours.</p>
+
+        <h2><span class="section-num">SECTION 07</span> Dynamic Log Files & Browser Cookies 🍪</h2>
+        <p>Like almost all modern web servers, we use standard log files. These files automatically log visitors to our website. The metrics include Internet Protocol (IP) addresses, browser type, Internet Service Provider (ISP), date/time stamp, referring/exit pages, and the number of clicks. These are not linked to any personally identifiable information and are strictly compiled for traffic analysis and server load balancing.</p>
+        
+        <p>We only use essential session cookies to maintain your dashboard login states on platforms like MemoMama. We do not use persistent tracking cookies to track your activity on external sites.</p>
+
+        <h2><span class="section-num">SECTION 08</span> Structural Account & Data Deletion Process 🗑️</h2>
+        <p>Your data belongs to you. If you wish to close your player profile, clear your leaderboard records, or delete your entire SaaS database from our server nodes, we provide a transparent, friction-free purging pipeline:</p>
+
+        <p>Simply draft an email from your registered email account to <strong style="color: #3399ff;">contact@riverstonegames.com</strong> with the subject line <strong>"Request for Total Account Deletion"</strong>. Our backend engineering team will verify your token and permanently wipe your records from our Firestore nodes, PlayFab analytics, and local caches within <strong>72 business hours</strong>. Once deleted, this data cannot be recovered.</p>
+
+        <h2><span class="section-num">SECTION 09</span> Contact Our Compliance Officer ✉️</h2>
+        <p>If you have any questions, statutory legal requests, or compliance inquiries regarding this comprehensive Privacy Policy, please reach out to our technical desk. We are here to ensure your digital experience remains private and fully secure.</p>
+        
+        <p style="text-align: center; margin-top: 40px; font-size: 1.1rem; color: #fff;">
+            <strong>Email:</strong> <a href="mailto:contact@riverstonegames.com" style="color: #3399ff; text-decoration: none; font-weight: bold; border-bottom: 1px dashed #3399ff;">contact@riverstonegames.com</a>
+        </p>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,199 @@
+<!-- কাস্টম সিএসএস যুক্ত স্লিম ও প্রিমিয়াম ফুটার (কোনো ইমেজ ব্যবহার করা হয়নি) -->
+<style>
+    footer {
+        background-color: #050505;
+        border-top: 2px solid #00ffcc; /* আপনার হেডার ও থিমের সাথে ম্যাচিং নেওন লাইন */
+        padding: 60px 0 30px 0;
+        color: #888;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin-top: 50px;
+    }
+
+    /* আমাদের হেডারের ১৪৪০px চওড়া সাইজের সাথে পারফেক্টলি এলাইন করা কন্টেইনার */
+    .footer-container {
+        max-width: 1440px;
+        width: 100%;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1.5fr 1fr 1fr;
+        gap: 50px;
+        padding: 0 30px;
+        box-sizing: border-box;
+    }
+
+    .footer-about p {
+        font-size: 0.95rem;
+        line-height: 1.7;
+        margin-top: 15px;
+        color: #666;
+        text-align: justify;
+    }
+
+    .footer-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: white;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: bold;
+        font-size: 1.25rem;
+        letter-spacing: 1px;
+    }
+
+    .footer-logo img {
+        height: 32px;
+    }
+
+    .footer-links h3 {
+        color: #fff;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1.1rem;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .footer-links ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .footer-links li {
+        margin-bottom: 12px;
+    }
+
+    .footer-links a {
+        color: #888;
+        text-decoration: none;
+        transition: 0.3s ease;
+        font-size: 0.95rem;
+    }
+
+    /* হোভার করলে আলতো করে স্লাইড হবে এবং নেওন গ্লো দেখাবে */
+    .footer-links a:hover {
+        color: #00ffcc;
+        text-shadow: 0 0 8px rgba(0, 255, 204, 0.4);
+        padding-left: 6px; 
+    }
+
+    /* ফুটারের একদম নিচের কপিরাইট ও সোশ্যাল স্ট্রিপ */
+    .footer-bottom {
+        max-width: 1440px;
+        width: 100%;
+        margin: 50px auto 0 auto;
+        padding: 25px 30px 0 30px;
+        border-top: 1px solid #111;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.85rem;
+        box-sizing: border-box;
+    }
+
+    .footer-socials {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap; /* এই লাইনটি মোবাইল স্ক্রিনে অনেকগুলো লিংক থাকলে ভেঙে সুন্দর লাইন তৈরি করবে */
+        justify-content: flex-end;
+    }
+
+    .footer-socials a {
+        color: #666;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: 0.3s ease;
+    }
+
+    .footer-socials a:hover {
+        color: #00ffcc;
+        text-shadow: 0 0 8px rgba(0, 255, 204, 0.4);
+    }
+
+    /* মোবাইল ও ট্যাবলেট রেসপন্সিভ */
+    @media (max-width: 992px) {
+        .footer-container {
+            grid-template-columns: 1fr;
+            text-align: center;
+            gap: 35px;
+        }
+        .footer-about p {
+            text-align: center;
+        }
+        .footer-logo {
+            justify-content: center;
+        }
+        .footer-links li a:hover {
+            padding-left: 0; /* মোবাইলে স্লাইড বন্ধ থাকবে */
+        }
+        .footer-bottom {
+            flex-direction: column;
+            gap: 18px;
+            text-align: center;
+            padding-top: 20px;
+        }
+        .footer-socials {
+            justify-content: center;
+            gap: 12px;
+        }
+    }
+</style>
+
+<footer>
+    <div class="footer-container">
+        
+        <!-- ১. বাম কলাম: কোম্পানি পরিচিতি -->
+        <div class="footer-about">
+            <div class="footer-logo">
+                <img src="/images/favicon.png" alt="Logo">
+                <span>RIVERSTONE GAMES</span>
+            </div>
+            <p>Crafting high-fidelity mobile games and scalable SaaS web systems. Precision, performance, and privacy-first engineering from Dhaka to the world. Let's build the future together, one pixel at a time. 🚀</p>
+        </div>
+
+        <!-- ২. কুইক লিংকসমূহ -->
+        <div class="footer-links">
+            <h3>Explore</h3>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/games">Games Library</a></li>
+                <li><a href="/web">Web Products</a></li>
+                <li><a href="/apps">Mobile Apps</a></li>
+                <li><a href="/portfolio">Portfolio</a></li>
+            </ul>
+        </div>
+
+        <!-- ৩. পলিসি ও লিগ্যাল লিংকসমূহ -->
+        <div class="footer-links">
+            <h3>Legal & Support</h3>
+            <ul>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/privacy">Privacy Policy</a></li>
+                <li><a href="/terms">Terms & Conditions</a></li>
+                <li><a href="/contact">Support / Contact</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- ৪. কপিরাইট এবং ৯টি সোশ্যাল লিংক স্ট্রিপ (ডাইনামিক বছরসহ) -->
+    <div class="footer-bottom">
+        <p>&copy; <%= new Date().getFullYear() %> Riverstone Games & Studios. All rights reserved.</p>
+        
+        <div class="footer-socials">
+            <!-- হ্যাস (#) মুছে আপনার আসল সোশ্যাল প্রোফাইলের লিংকগুলো বসিয়ে দেবেন -->
+            <a href="https://discord.gg/BcUG72XYh2" target="_blank">Discord</a>
+            <a href="https://x.com/Ashikbi93519391" target="_blank">Twitter</a>
+            <a href="https://github.com/RiverstoneGames" target="_blank">GitHub</a>
+            <a href="https://www.reddit.com/user/AH-Ofishal" target="_blank">Reddit</a>
+            <a href="https://www.pinterest.com/ashiqbis" target="_blank">Pinterest</a>
+            <a href="https://bn.quora.com/profile/Faruk-193" target="_blank">Quora</a>
+            <a href="https://www.facebook.com/riverstonegames" target="_blank">Facebook</a>
+            <a href="https://www.linkedin.com/company/110354847" target="_blank">LinkedIn</a>
+            <a href="https://www.youtube.com/@RiverstoneGames" target="_blank">YouTube</a>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

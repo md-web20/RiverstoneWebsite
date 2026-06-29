@@ -1,0 +1,251 @@
+<%- include('partials/header') %>
+
+<style>
+    /* গ্লোবাল নেভি-ডার্ক স্পেস থিম */
+    .legal-page-wrapper { 
+        background-color: #060b13; 
+        color: white; 
+        min-height: 100vh; 
+        padding-bottom: 100px; 
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        position: relative;
+    }
+
+    /* পিউর সিএসএস সাইবারনেটিক নেভি ব্লু গ্রিড হিরো */
+    .legal-hero { 
+        height: 45vh; 
+        background: 
+            radial-gradient(circle at 50% 50%, rgba(0, 153, 255, 0.15), transparent 60%),
+            #060b13;
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        text-align: center; 
+        border-bottom: 2px solid #0099ff; 
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* ইলেকট্রিক ব্লু সাইবার গ্রিড ওভারলে */
+    .legal-hero::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: 
+            linear-gradient(rgba(0, 153, 255, 0.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 153, 255, 0.04) 1px, transparent 1px);
+        background-size: 40px 40px;
+        z-index: 1;
+    }
+
+    /* গ্লোয়িং ব্যাক বাটন (Back Button) */
+    .btn-back-legal {
+        position: absolute;
+        top: 100px; 
+        left: 10%;
+        background: transparent;
+        color: #3399ff;
+        border: 1px solid #1a2638;
+        padding: 10px 22px;
+        border-radius: 25px;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.9rem;
+        font-weight: bold;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.3s ease;
+        z-index: 10;
+        box-shadow: 0 0 10px rgba(0, 153, 255, 0.05);
+    }
+
+    .btn-back-legal:hover {
+        border-color: #3399ff;
+        color: #fff;
+        background: rgba(0, 153, 255, 0.1);
+        box-shadow: 0 0 15px rgba(0, 153, 255, 0.4);
+        transform: translateX(-5px); 
+    }
+
+    .legal-title { 
+        font-family: 'Orbitron', sans-serif; 
+        font-size: 3.5rem; 
+        color: #3399ff; 
+        margin-top: 80px; 
+        text-transform: uppercase; 
+        letter-spacing: 2px;
+        z-index: 2;
+        text-shadow: 0 0 20px rgba(0, 153, 255, 0.6);
+    }
+
+    /* কন্টেন্ট লেআউট */
+    .legal-content { 
+        max-width: 950px; 
+        margin: 60px auto 0 auto; 
+        padding: 0 5%; 
+        line-height: 1.95; 
+        color: #ccc; 
+    }
+
+    /* হেডলাইনের প্রিমিয়াম ডেকোরেশন */
+    .legal-content h2 { 
+        color: #fff; 
+        font-family: 'Orbitron', sans-serif; 
+        font-size: 1.8rem;
+        margin-top: 50px; 
+        margin-bottom: 25px; 
+        border-bottom: 1px solid #1a2638;
+        padding-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .section-num {
+        color: #3399ff;
+        font-size: 1.3rem;
+        font-weight: bold;
+    }
+
+    .legal-content p { 
+        margin-bottom: 25px; 
+        text-align: justify; 
+        font-size: 1.05rem;
+    }
+
+    .sub-section {
+        background: #09111c;
+        border: 1px solid #1a2638;
+        padding: 30px;
+        border-radius: 12px;
+        margin-bottom: 35px;
+        transition: 0.3s;
+    }
+
+    .sub-section:hover {
+        border-color: #3399ff;
+        background: #0d1a2b;
+        box-shadow: 0 5px 20px rgba(0, 153, 255, 0.05);
+    }
+
+    .sub-section h3 {
+        font-family: 'Orbitron', sans-serif;
+        color: #3399ff;
+        margin-top: 0;
+        margin-bottom: 15px;
+        font-size: 1.3rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .highlight-text {
+        color: #3399ff;
+        font-weight: bold;
+    }
+
+    .tech-list {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
+    .tech-list li {
+        margin-bottom: 15px;
+        position: relative;
+        padding-left: 25px;
+        line-height: 1.7;
+    }
+
+    .tech-list li::before {
+        content: '✦';
+        position: absolute;
+        left: 0;
+        color: #3399ff;
+    }
+</style>
+
+<div class="legal-page-wrapper">
+    
+    <!-- ব্যাক বাটন (Back to Contact) -->
+    <a href="/contact" class="btn-back-legal">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        BACK
+    </a>
+
+    <!-- ১. হিরো সেকশন -->
+    <div class="legal-hero">
+        <h1 class="legal-title">Terms of Service ⚖️</h1>
+    </div>
+
+    <!-- ২. বিস্তারিত ও প্লে-স্টোর কমপ্লায়েন্ট আইনি কন্টেন্ট -->
+    <div class="legal-content">
+        
+        <h2><span class="section-num">SECTION 01</span> Agreement to Terms & Conditions 🌐</h2>
+        <p>These Terms of Service constitute a legally binding agreement made between you, whether personally or on behalf of an entity ("you") and <strong>Riverstone Games & Studios</strong> ("we", "us", "our"), concerning your access to and use of our digital platforms, including our official studio website, mobile gaming catalogs (e.g., <em>Tube Bubble Sort</em>, <em>Jigsaw Photo Arena</em>), and enterprise web/SaaS ecosystems (e.g., <em>MemoMama</em>).</p>
+        
+        <p>By downloading, playing, accessing, subscribing, or interacting with our software products, you acknowledge that you have read, understood, and agreed to be bound by all of these Terms of Service. If you do not agree with all of these terms, you are strictly prohibited from utilizing our software, and you must cease access immediately.</p>
+
+        <h2><span class="section-num">SECTION 02</span> Intellectual Property Rights 🛡️</h2>
+        <p>All source code, databases, software architectures, algorithms, game designs, tactile physics loops, graphical assets, video clips, audios, logos, trademarks, and branding assets (collectively, the "Content") featured on our platforms are owned, controlled, or licensed by us:</p>
+
+        <!-- সাব-সেকশন ১ -->
+        <div class="sub-section">
+            <h3>💻 Copyright and Trademark Protection</h3>
+            <p>Our dynamic codes, EJS/HTML structures, React layouts, C# Unity libraries, and custom bookkeeping frameworks (such as <em>MemoMama's</em> atomic ledger logic) are protected by international copyright, patent, and intellectual property laws. You are granted a limited, non-exclusive, non-transferable license strictly to play our games and run our SaaS tools for personal or approved business transactions.</p>
+        </div>
+
+        <!-- সাব-সেকশন ২ -->
+        <div class="sub-section">
+            <h3>🚫 Prohibited Asset Copying & Reverse-Engineering</h3>
+            <p>You may not copy, reproduce, aggregate, republish, distribute, sell, license, decompile, decrypt, disassemble, or reverse-engineer any portion of our game packages (APK/IPA files), database architectures, or web assets. Any unauthorized modification or cracking of our virtual items or currency values will result in immediate legal actions and dynamic IP blacklisting.</p>
+        </div>
+
+        <h2><span class="section-num">SECTION 03</span> User Representations & Accounts 👤</h2>
+        <p>By creating a profile, logging in anonymously, or accessing our bookkeeping frameworks, you warrant and agree to the following operational parameters:</p>
+
+        <ul class="tech-list" style="color: #ccc; font-size: 1.05rem; margin-bottom: 30px;">
+            <li><strong>Accuracy of Records:</strong> Any registration details, enterprise metrics, or transaction ledgers you submit are accurate, current, and true.</li>
+            <li><strong>Age Requirements:</strong> You comply with the minimum age limits required to access online games and cloud applications in your region (typically 13 years or older).</li>
+            <li><strong>Account Confidentiality:</strong> You are solely responsible for maintaining the confidentiality of your session tokens, password hashes, and database configurations.</li>
+            <li><strong>Lawful Use:</strong> You will not use our games, SaaS tools, or API modules for any unlawful, illegal, fraudulent, or unauthorized commercial activities.</li>
+        </ul>
+
+        <h2><span class="section-num">SECTION 04</span> Prohibited Activities & Fair Play Rules 🛑</h2>
+        <p>To preserve the competitive integrity of our multiplayer game leaderboards and ensure high-fidelity workspace security on our web platforms, the following activities are strictly prohibited:</p>
+
+        <p>You may not manipulate or inflate leaderboard scores (e.g., in <em>Jigsaw Photo Arena</em>) utilizing automated bots, memory-injection tools (such as Cheat Engine), or modified client packages. Furthermore, you are prohibited from utilizing automated scripts or web crawlers to harvest data from our servers, executing DDoS attacks against our Firestore or PlayFab cloud nodes, or injecting malicious SQL, cross-site scripting (XSS), or trojan vectors into our contact forms or database parameters.</p>
+
+        <h2><span class="section-num">SECTION 05</span> Cloud Service Interruptions & Maintenance 🔄</h2>
+        <p>While we strive to maintain a flawless <span class="highlight-text">99.9% uptime</span> for our connected databases, server-side frameworks, and SaaS accounting modules, temporary disruptions may occur:</p>
+
+        <p>We reserve the right to modify, update, suspend, or terminate any game level, skin catalog, database rules, or SaaS functionality at any time for scheduled maintenance, database migrations, or live-ops event deployments. We shall not be held liable for temporary connection delays, lost database writes resulting from local ISP failures, or third-party server hosting outages (e.g., Google Cloud or Microsoft Azure anomalies).</p>
+
+        <h2><span class="section-num">SECTION 06</span> Disclaimers of Warranties & Limitations of Liability ⚖️</h2>
+        <p>All software platforms developed by Riverstone Games are delivered strictly on an <strong>"As-Is"</strong> and <strong>"As-Available"</strong> basis without warranties of any kind:</p>
+
+        <div class="sub-section">
+            <h3>⚠️ No Liability for Lost Data or Profits</h3>
+            <p>To the maximum extent permitted by applicable laws, in no event shall <strong>Riverstone Games & Studios</strong> or our directors, engineers, and partners be held liable to you or any third party for any direct, indirect, consequential, exemplary, incidental, or punitive damages. This includes lost profits, lost revenue, lost inventory values, or lost database metrics arising from your use or inability to use our applications.</p>
+        </div>
+
+        <h2><span class="section-num">SECTION 07</span> Account Suspension & Data Purging 🗑️</h2>
+        <p>We reserve the right, in our sole discretion and without prior notification, to suspend, terminate, or delete accounts, IP configurations, or database accesses that violate our terms:</p>
+
+        <p>Any account found executing fraudulent transactions on MemoMama, violating fair-play regulations on PlayFab leaderboards, or exploiting database loopholes will be flagged and permanently banned. If you wish to request manual account and data termination, you can mail us directly at our technical desk. All associated metadata will be purged from our active nodes in compliance with our Privacy Policy.</p>
+
+        <h2><span class="section-num">SECTION 08</span> Governing Law & Legal Jurisdiction 🏛️</h2>
+        <p>These Terms of Service and your use of our software are governed by and construed in accordance with the laws of Bangladesh, without regard to its conflict of law principles. Any legal action, dispute resolution, or arbitration arising from these terms shall be settled within the competent courts of Dhaka, Bangladesh, serving as the primary legal jurisdiction.</p>
+
+        <h2><span class="section-num">SECTION 09</span> Modifications to Terms & Contact Information ✉️</h2>
+        <p>We reserve the right to update or modify these Terms of Service at any time. Any changes will be posted on this page with an updated timestamp, and continuing to use our services implies your complete agreement to the updated terms.</p>
+        
+        <p>If you have any questions, compliance concerns, or legal inquiries regarding these Terms of Service, please reach out to our legal compliance desk directly:</p>
+        
+        <p style="text-align: center; margin-top: 40px; font-size: 1.1rem; color: #fff;">
+            <strong>Email:</strong> <a href="mailto:contact@riverstonegames.com" style="color: #3399ff; text-decoration: none; font-weight: bold; border-bottom: 1px dashed #3399ff;">contact@riverstonegames.com</a>
+        </p>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

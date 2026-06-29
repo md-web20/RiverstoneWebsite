@@ -1,0 +1,351 @@
+<%- include('partials/header') %>
+
+<section class="hero">
+    <!-- মেইন টাইটেল -->
+    <h1 id="main-hero-title">RIVERSTONE</h1>
+    
+    <!-- সাইক্লিং টেক্সট এলাকা (গ্লো সহ) -->
+    <div class="cycling-area">
+        <span id="cycling-words">GAMES</span>
+    </div>
+    
+    <p style="max-width: 700px; color: #cbd5e1; margin-bottom: 40px;">
+        Crafting the future of digital interaction through futuristic engines and ecosystems.
+    </p>
+    
+    <div class="btn-container" style="display: flex; gap: 20px;">
+        <a href="/portfolio" class="btn-futuristic entire-pulse">Explore Work</a>
+        <a href="/contact" class="btn-futuristic entire-pulse white-pulse">Hire Us</a>
+    </div>
+</section>
+
+<!-- এই সেই তিনটি বক্স সেকশন যা আগে বাদ গিয়েছিল -->
+<section class="services">
+    <h2 class="section-title">Our Expertise</h2>
+    <div class="services-container">
+        
+        <div class="service-card">
+            <div class="icon">🎮</div>
+            <h3>Game Development</h3>
+            <p>Developing high-fidelity immersive games for PC and Mobile using cutting-edge engines.</p>
+        </div>
+
+        <div class="service-card" style="animation-delay: 1s;">
+            <div class="icon">🌐</div>
+            <h3>Web Development</h3>
+            <p>Building lightning-fast, SEO-optimized, and futuristic web applications using modern JS.</p>
+        </div>
+
+        <div class="service-card" style="animation-delay: 2s;">
+            <div class="icon">📱</div>
+            <h3>App Development</h3>
+            <p>Creating high-performance cross-platform mobile apps for Android and iOS using Flutter.</p>
+        </div>
+
+    </div>
+</section>
+
+<script>
+    // ১. ক্যারেক্টার ড্রপিং এনিমেশন ফাংশন (অক্ষর এক এক করে আসবে)
+    function animateText(id, color) {
+        const el = document.getElementById(id);
+        const text = el.innerText;
+        el.innerHTML = ""; 
+        
+        text.split('').forEach((char, i) => {
+            const span = document.createElement('span');
+            span.innerHTML = char === ' ' ? '&nbsp;' : char;
+            span.className = 'char';
+            span.style.color = color;
+            el.appendChild(span);
+            
+            setTimeout(() => {
+                span.style.opacity = "1";
+                span.style.transform = "translateY(0)";
+            }, i * 100); // ক্যারেক্টার ড্রপ স্পিড
+        });
+    }
+
+    const colors = ["#00d2ff", "#ff007f", "#92fe9d", "#ffcc00"];
+    let colorIdx = 0;
+
+    function runAnimationCycle() {
+        const activeColor = colors[colorIdx];
+        animateText('nav-brand', activeColor);
+        animateText('main-hero-title', activeColor);
+        colorIdx = (colorIdx + 1) % colors.length;
+    }
+
+    // প্রতি ৫ সেকেন্ড অন্তর এনিমেশন রান করবে
+    runAnimationCycle();
+    setInterval(runAnimationCycle, 5000);
+
+    // ২. মাঝখানের সাইক্লিং টেক্সট (GAMES, WEB APPS, MOBILE APPS)
+    const cyclingSpan = document.getElementById('cycling-words');
+    const categories = ["GAMES", "WEB APPS", "MOBILE APPS"];
+    let catIdx = 0;
+
+    setInterval(() => {
+        catIdx = (catIdx + 1) % categories.length;
+        cyclingSpan.textContent = categories[catIdx];
+        cyclingSpan.style.color = colors[Math.floor(Math.random() * colors.length)];
+    }, 5000);
+</script>
+
+<!-- ======================================================== -->
+<!-- নতুন যুক্ত করা সেকশনসমূহ (Beta Test, Newsletter & Pop-up) -->
+<!-- ======================================================== -->
+
+<!-- ১. আপকামিং গেম এবং বিটা টেস্ট সেকশন -->
+
+<section class="upcoming-game-section" style="padding: 60px 10%; background: #0d0d0d; border-top: 1px solid #1a1a1a; margin-top: 50px;">
+    
+    <!-- স্লাইড কন্টেইনার (এখানে ডাইনামিক্যালি গেমগুলো আসবে) -->
+    <div id="slider-container" style="position: relative; width: 100%; min-height: 320px;">
+        <!-- JS দিয়ে স্লাইড ইনজেক্ট হবে -->
+    </div>
+    
+    <!-- স্লাইডার কন্ট্রোল বাটন (একের অধিক গেম থাকলে নিজে থেকেই শো করবে) -->
+    <div id="slider-nav" style="display: none; justify-content: center; gap: 20px; margin-top: 40px;">
+        <button onclick="prevSlide()" class="btn-slider-nav">◀ Prev</button>
+        <button onclick="nextSlide()" class="btn-slider-nav">Next ▶</button>
+    </div>
+</section>
+
+<!-- ২. নিউজলেটার সাবস্ক্রিপশন বক্স সেকশন -->
+<section class="newsletter-section" style="padding: 80px 10%; background: #0a0a0a; border-top: 1px solid #1a1a1a; text-align: center;">
+    <div style="max-width: 700px; margin: 0 auto; background: #111; padding: 45px; border-radius: 15px; border: 1px solid #222; box-shadow: 0 0 25px rgba(0, 255, 204, 0.05); transition: 0.3s;" onmouseover="this.style.borderColor='#00ffcc'" onmouseout="this.style.borderColor='#222'" id="newsCard">
+        <h2 style="font-family: 'Orbitron', sans-serif; color: #fff; font-size: 2rem; text-transform: uppercase; margin-bottom: 15px;">Stay In The Loop 🚀</h2>
+        <p style="color: #aaa; font-size: 1.05rem; line-height: 1.6; margin-bottom: 30px; padding: 0 10px;">
+            Subscribe to our newsletter to get the latest game updates, free promo codes, and exclusive invitations to closed beta tests.
+        </p>
+        
+        <form id="newsletterForm" style="display: flex; gap: 15px; justify-content: center; max-width: 550px; margin: 0 auto;">
+            <input type="email" name="email" required placeholder="Enter your email address" style="flex: 1; background: #060b13; border: 1px solid #333; padding: 12px 18px; color: white; border-radius: 6px; font-size: 1rem; transition: 0.3s;" onfocus="this.style.borderColor='#00ffcc'" onblur="this.style.borderColor='#333'">
+            <button type="submit" style="background: #00ffcc; color: black; border: none; padding: 12px 25px; font-size: 1rem; font-weight: bold; border-radius: 6px; cursor: pointer; text-transform: uppercase; font-family: 'Orbitron', sans-serif; transition: 0.3s;">Subscribe</button>
+        </form>
+    </div>
+</section>
+
+<!-- ৩. স্মার্ট বিটা টেস্ট পপ-আপ মডাল (Modal) -->
+<div id="betaModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center; transition: 0.3s;">
+    <div style="background: #111; border: 2px solid #00ffcc; box-shadow: 0 0 25px #00ffcc; padding: 40px; border-radius: 15px; max-width: 500px; width: 90%; position: relative;">
+        <button onclick="closeBetaModal()" style="position: absolute; top: 15px; right: 20px; font-size: 30px; background: none; border: none; color: white; cursor: pointer; transition: 0.3s;" onmouseover="this.style.color='#00ffcc'" onmouseout="this.style.color='white'">&times;</button>
+        
+        <h2 id="modal-game-title" style="font-family: 'Orbitron', sans-serif; color: #00ffcc; text-transform: uppercase; margin-bottom: 15px; font-size: 1.8rem; display: flex; align-items: center; gap: 10px;">👾 Join Closed Beta</h2>
+        <p style="color: #aaa; line-height: 1.6; margin-bottom: 25px; font-size: 0.95rem;">
+            Enter your email address below to join the closed beta testing pool for this game. We will send you an exclusive early access link once testing slots open!
+        </p>
+        
+        <form id="betaForm">
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; color: #888; font-size: 0.85rem; margin-bottom: 8px; text-transform: uppercase;">Your Email Address</label>
+                <input type="email" name="email" required placeholder="john@example.com" style="width: 100%; background: #060b13; border: 1px solid #333; padding: 12px; color: white; border-radius: 6px; font-size: 1rem; transition: 0.3s; box-sizing: border-box;" onfocus="this.style.borderColor='#00ffcc'" onblur="this.style.borderColor='#333'">
+            </div>
+            <button type="submit" style="background: #00ffcc; color: black; border: none; padding: 12px; font-size: 1.1rem; font-weight: bold; border-radius: 6px; cursor: pointer; text-transform: uppercase; font-family: 'Orbitron', sans-serif; transition: 0.3s; width: 100%;">Submit Application</button>
+        </form>
+    </div>
+</div>
+
+<!-- ৪. হোমপেজ নোটিফিকেশন পপ-আপ টোস্ট (Toast) -->
+<div id="homeToast" style="display: none; position: fixed; top: 100px; right: 30px; background: #111; border: 2px solid #00ffcc; box-shadow: 0 0 15px #00ffcc; padding: 15px 25px; border-radius: 8px; z-index: 3000; transition: opacity 0.5s ease; align-items: center; gap: 12px; opacity: 0;">
+    <span style="color:#00ffcc; font-size:1.3rem; font-weight:bold;">✓</span>
+    <span id="toastText" style="color:white; font-weight:bold; font-family: 'Orbitron', sans-serif;">Action Completed!</span>
+</div>
+
+<style>
+    /* স্লাইডার বাটনগুলোর জন্য নেওন স্টাইল */
+    .btn-slider-nav {
+        background: transparent;
+        color: #00ffcc;
+        border: 1px solid #333;
+        padding: 10px 24px;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 25px;
+        transition: 0.3s;
+    }
+    .btn-slider-nav:hover {
+        border-color: #00ffcc;
+        box-shadow: 0 0 10px rgba(0, 255, 204, 0.4);
+        background: rgba(0, 255, 204, 0.05);
+    }
+</style>
+
+<!-- ======================================================== -->
+<!-- ৫. স্ক্রিপ্ট সেকশন: ডাটা এবং কন্ট্রোল লজিক -->
+<!-- ======================================================== -->
+<script>
+    // ==========================================
+    // ক. আপকামিং গেমস ডাটা অ্যারে (এখান থেকে এডিট করবেন)
+    // ==========================================
+    const upcomingGamesList = [
+        {
+            id: 1,
+            title: "JIGSAW PHOTO PUZZLE ARENA",
+            desc: "A premium, cloud-connected 2D mobile Jigsaw Puzzle game built in Unity. Features a procedural run-time image-slicing engine, PlayFab global leaderboards, AdMob monetization, and an innovative custom photo puzzle-sharing portal powered by Firebase and offline local caching.",
+            thumbnail: "/images/Gp.png",
+            genre:  "Art Puzzle",
+        },
+        {
+            id: 2,
+            title: "Cyber Rush 3D",
+            desc: "An endless sci-fi runner game with intense synthwave music, procedurally generated neon obstacles, and competitive local database high-scores.",
+            thumbnail: "/images/coming-soon.png",
+            genre: "Arcade Runner"
+        }
+    ];
+
+    // স্লাইডার কন্ট্রোল করার ভেরিয়েবল
+    let currentSlideIndex = 0;
+    let selectedGameForBeta = null;
+
+    // ==========================================
+    // খ. ডাইনামিক স্লাইডার রেন্ডারিং ইঞ্জিন
+    // ==========================================
+    function renderUpcomingSlider() {
+        const container = document.getElementById('slider-container');
+        const nav = document.getElementById('slider-nav');
+        
+        // ১টির বেশি গেম থাকলে বাটনগুলো অটোমেটিক শো করবে
+        if (upcomingGamesList.length > 1) {
+            nav.style.display = 'flex';
+        } else {
+            nav.style.display = 'none';
+        }
+
+        container.innerHTML = "";
+
+        upcomingGamesList.forEach((game, index) => {
+            // শুধুমাত্র বর্তমান স্লাইডটি ডিসপ্লে (flex) করবে, বাকিগুলো হাইড থাকবে
+            const displayStyle = index === currentSlideIndex ? 'display: grid;' : 'display: none;';
+            
+            container.innerHTML += `
+                <div class="upcoming-slide" id="slide-${index}" style="${displayStyle} grid-template-columns: 1fr 1.2fr; gap: 50px; align-items: center; transition: opacity 0.5s ease-in-out;">
+                    
+                    <!-- বাম পাশের আর্টবক্স -->
+                    <div style="position: relative; border-radius: 15px; overflow: hidden; border: 1px solid #222; height: 320px; box-shadow: 0 0 20px rgba(0, 255, 204, 0.05); transition: 0.3s;" onmouseover="this.style.borderColor='#00ffcc'" onmouseout="this.style.borderColor='#222'">
+                        <img src="${game.thumbnail}" alt="${game.title}" style="width: 100%; height: 100%; object-fit: cover;">
+                        <span style="position: absolute; top: 15px; right: 15px; background: #00ffcc; color: black; padding: 5px 12px; border-radius: 5px; font-weight: bold; font-size: 0.8rem; font-family: 'Orbitron', sans-serif; letter-spacing: 1px;">COMING SOON</span>
+                    </div>
+                    
+                    <!-- ডান পাশের বিবরণ -->
+                    <div>
+                        <span style="color: #00ffcc; font-family: 'Orbitron', sans-serif; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; display: inline-block; margin-bottom: 10px;">${game.genre}</span>
+                        <h2 style="font-family: 'Orbitron', sans-serif; color: #fff; font-size: 2.2rem; text-transform: uppercase; margin-bottom: 15px;">${game.title} 👾</h2>
+                        <p style="color: #aaa; line-height: 1.7; margin-bottom: 25px; font-size: 1.02rem; text-align: justify;">${game.desc}</p>
+                        
+                        <button onclick="openBetaModal(${game.id})" style="background: transparent; color: #00ffcc; border: 2px solid #00ffcc; padding: 12px 30px; font-size: 1rem; font-weight: bold; border-radius: 6px; cursor: pointer; text-transform: uppercase; transition: 0.3s; font-family: 'Orbitron', sans-serif; display: inline-flex; align-items: center; gap: 10px;">
+                            Join Beta Test 🎮
+                        </button>
+                    </div>
+
+                </div>
+            `;
+        });
+    }
+
+    // স্লাইড নেভিগেশন
+    function nextSlide() {
+        currentSlideIndex = (currentSlideIndex + 1) % upcomingGamesList.length;
+        renderUpcomingSlider();
+    }
+
+    function prevSlide() {
+        currentSlideIndex = (currentSlideIndex - 1 + upcomingGamesList.length) % upcomingGamesList.length;
+        renderUpcomingSlider();
+    }
+
+    // ==========================================
+    // গ. ইন্টারঅ্যাকশন কন্ট্রোল
+    // ==========================================
+    function openBetaModal(gameId) {
+        selectedGameForBeta = upcomingGamesList.find(g => g.id === gameId);
+        document.getElementById('modal-game-title').innerHTML = `👾 Join ${selectedGameForBeta.title} Beta`;
+        document.getElementById('betaModal').style.display = 'flex';
+        document.body.style.overflow = 'hidden'; 
+    }
+
+    function closeBetaModal() {
+        document.getElementById('betaModal').style.display = 'none';
+        document.body.style.overflow = 'auto'; 
+    }
+
+    const homeToast = document.getElementById('homeToast');
+    const toastText = document.getElementById('toastText');
+
+    function triggerHomeToast(message) {
+        toastText.innerText = message;
+        homeToast.style.display = 'flex';
+        setTimeout(() => { homeToast.style.opacity = '1'; }, 50);
+
+        setTimeout(() => {
+            homeToast.style.opacity = '0';
+            setTimeout(() => { homeToast.style.display = 'none'; }, 500);
+        }, 3000);
+    }
+
+    // ==========================================
+    // ঘ. Web3Forms রিয়েল-টাইম ইমেইল সাবমিশন
+    // ==========================================
+    const accessKeyVal = '8ed9b0bc-9172-4154-9bde-460a06679709'; 
+
+    // ১. নিউজলেটার সাবমিশন
+    const newsletterForm = document.getElementById('newsletterForm');
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(newsletterForm);
+            formData.append('access_key', accessKeyVal);
+            formData.append('subject', 'New Newsletter Subscriber Registered!');
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.success) {
+                    triggerHomeToast("Newsletter Subscription Completed!");
+                    newsletterForm.reset();
+                } else {
+                    alert("Submission failed. Try again.");
+                }
+            }).catch(err => console.error("Error:", err));
+        });
+    }
+
+    // ২. স্মার্ট বিটা টেস্টার সাবমিশন
+    const betaForm = document.getElementById('betaForm');
+    if (betaForm) {
+        betaForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(betaForm);
+            formData.append('access_key', accessKeyVal);
+            
+            const gameTitle = selectedGameForBeta ? selectedGameForBeta.title : "Upcoming Game";
+            formData.append('subject', `New Beta Tester Applicant for ${gameTitle}!`);
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.success) {
+                    closeBetaModal();
+                    triggerHomeToast(`Applied for ${gameTitle} Beta!`);
+                    betaForm.reset();
+                } else {
+                    alert("Submission failed. Try again.");
+                }
+            }).catch(err => console.error("Error:", err));
+        });
+    }
+
+    // প্রথম স্লাইড রেন্ডার করা
+    renderUpcomingSlider();
+</script>
+
+<%- include('partials/footer') %>

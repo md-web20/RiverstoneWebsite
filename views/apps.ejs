@@ -1,0 +1,415 @@
+<%- include('partials/header') %>
+
+<style>
+    /* অ্যাপস পেজের গ্লোবাল স্টাইল */
+    .apps-page-wrapper {
+        background-color: #0a0a0a;
+        color: white;
+        min-height: 100vh;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        padding-bottom: 60px;
+    }
+
+    /* ১. হিরো সেকশন (Featured App) */
+    .featured-app-hero {
+        position: relative;
+        width: 100%;
+        height: 80vh;
+        display: flex;
+        align-items: center;
+        padding: 0 10%;
+        background-size: cover !important;
+        background-position: center top !important;
+    }
+
+    .hero-content {
+        max-width: 650px;
+        z-index: 2;
+        margin-top: 80px; /* হেডার বা মেনুবারের জন্য গ্যাপ */
+    }
+
+    .badge-app {
+        background-color: #00ffcc;
+        color: #000;
+        padding: 6px 15px;
+        border-radius: 20px;
+        font-weight: 800;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 20px;
+        display: inline-block;
+    }
+
+    .hero-title {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 3.5rem;
+        font-weight: 900;
+        line-height: 1.1;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+    }
+
+    .hero-desc {
+        font-size: 1.15rem;
+        color: #ddd;
+        margin-bottom: 30px;
+        line-height: 1.6;
+    }
+
+    .app-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    /* প্লে-স্টোর ও অ্যাপ-স্টোর বাটন ডিজাইন */
+    .btn-store {
+        background: #111;
+        color: #fff;
+        border: 2px solid #333;
+        padding: 12px 25px;
+        font-size: 1rem;
+        font-weight: bold;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .btn-store.play-store:hover {
+        background: #00ffcc;
+        color: #000;
+        border-color: #00ffcc;
+        box-shadow: 0 0 15px #00ffcc;
+        transform: translateY(-2px);
+    }
+
+    .btn-store.app-store:hover {
+        background: #fff;
+        color: #000;
+        border-color: #fff;
+        box-shadow: 0 0 15px #fff;
+        transform: translateY(-2px);
+    }
+
+    .badge-coming {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px dashed #555;
+        color: #aaa;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-weight: bold;
+    }
+
+    /* ২. অ্যাপস গ্রিড সেকশন */
+    .apps-library {
+        padding: 60px 10%;
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .section-header h2 {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 2.8rem;
+        color: white;
+        text-transform: uppercase;
+    }
+    
+    .section-header h2 span {
+        color: #00ffcc;
+    }
+
+    .apps-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 40px;
+    }
+
+    .app-card {
+        background: #111;
+        border-radius: 15px;
+        overflow: hidden;
+        border: 1px solid #222;
+        transition: all 0.4s ease;
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+    }
+
+    .app-card:hover {
+        transform: translateY(-10px);
+        border-color: #00ffcc;
+        box-shadow: 0 15px 30px rgba(0, 255, 204, 0.15);
+    }
+
+    .card-img-wrapper {
+        position: relative;
+        height: 220px;
+        overflow: hidden;
+    }
+
+    .card-img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+    }
+
+    .app-card:hover .card-img-wrapper img {
+        transform: scale(1.05);
+    }
+
+    .category-tag {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: rgba(0, 0, 0, 0.7);
+        color: #00ffcc;
+        padding: 5px 12px;
+        border-radius: 5px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        border: 1px solid #00ffcc;
+        backdrop-filter: blur(5px);
+    }
+
+    .card-content {
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    .card-content h3 {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1.5rem;
+        margin: 0 0 12px 0;
+        color: white;
+    }
+
+    .card-content p {
+        color: #aaa;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        margin-bottom: 25px;
+        flex-grow: 1;
+    }
+
+    .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 1px solid #222;
+        padding-top: 15px;
+    }
+
+    .platforms-list {
+        display: flex;
+        gap: 10px;
+    }
+
+    .platform-badge {
+        background: #1c1c1c;
+        color: #999;
+        font-size: 0.75rem;
+        font-weight: bold;
+        padding: 4px 8px;
+        border-radius: 4px;
+        border: 1px solid #333;
+    }
+
+    .get-app-link {
+        color: #00ffcc;
+        text-decoration: none;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        transition: 0.3s;
+    }
+
+    .get-app-link:hover {
+        text-shadow: 0 0 10px #00ffcc;
+    }
+
+    @media (max-width: 768px) {
+        .hero-title { font-size: 2.5rem; }
+        .app-buttons { flex-direction: column; }
+        .btn-store { text-align: center; justify-content: center; }
+        .featured-app-hero { padding: 0 5%; text-align: center; }
+        .hero-content { margin: 80px auto 0 auto; }
+        .apps-library { padding: 50px 5%; }
+    }
+</style>
+
+<div class="apps-page-wrapper">
+    <!-- ১. হিরো সেকশন (ডাইনামিক) -->
+    <header id="dynamic-app-hero" class="featured-app-hero">
+        <!-- Content injected by JS -->
+    </header>
+
+    <!-- ২. অ্যাপ ক্যাটালগ সেকশন -->
+    <section class="apps-library">
+        <div class="section-header">
+            <h2>Our Mobile <span style="color: #00ffcc;">Apps</span></h2>
+            <p style="color: #888; font-size: 1.1rem; margin-top: 10px;">Handcrafted mobile applications and productivity tools.</p>
+        </div>
+        
+        <!-- গ্রিড (ডাইনামিক) -->
+        <div id="dynamic-apps-grid" class="apps-grid">
+            <!-- Cards injected by JS -->
+        </div>
+    </section>
+</div>
+
+<script>
+    // ========================================================
+    // আপনার মোবাইল অ্যাপের ডাটা ব্লক: এখান থেকেই সব কন্ট্রোল করবেন
+    // ========================================================
+    const appsList = [
+        {
+            id: 1,
+            title: "MemoMama Companion App",
+            shortDesc: "Manage your business on the go. The official mobile companion app for MemoMama bookkeeping, offering real-time notifications, offline invoicing, and instant barcode scanning.",
+            thumbnail: "/images/coming-soon.png", // আপনার ইমেজের নাম ঠিক করে নেবেন
+            category: "Business & Productivity",
+            platforms: ["Android", "iOS"],
+            
+            // প্লে-স্টোর ও অ্যাপ-স্টোরের লিংক (লিংক না থাকলে "#" দিয়ে রাখবেন)
+            playStoreLink: "https://play.google.com/store/apps/details?id=com.RiverstoneGames.TubeBubbleSort", 
+            appStoreLink: "#", 
+            
+            isFeatured: true, // "true" দিলে এই অ্যাপটি হিরো ব্যানারে বড় করে দেখাবে
+            isComingSoon: false
+        },
+        {
+            id: 2,
+            title: "Riverstone Authenticator",
+            shortDesc: "A secure, offline-first 2FA code generator to protect your digital accounts with 256-bit encryption and dynamic offline sync.",
+            thumbnail: "/images/coming-soon.png",
+            category: "Utility & Security",
+            platforms: ["Android"],
+            playStoreLink: "#",
+            appStoreLink: "#", // শুধুমাত্র অ্যান্ড্রয়েডের জন্য, তাই অ্যাপ স্টোর লিংক হ্যাশ
+            isFeatured: false,
+            isComingSoon: false
+        }
+    ];
+
+    // ========================================================
+    // টেক্সট ছোট করার হেল্পার ফাংশন (ডট ডট দেখানোর জন্য)
+    // ========================================================
+    function truncateText(str, limit) {
+        if (!str) return "";
+        if (str.length > limit) {
+            return str.substring(0, limit) + "...";
+        }
+        return str;
+    }
+
+    // ========================================================
+    // ডাটা রেন্ডার করার লজিক
+    // ========================================================
+    
+    // ১. অ্যাপ হিরো রেন্ডার করা
+    function renderAppHero() {
+        const heroSection = document.getElementById('dynamic-app-hero');
+        const featuredApp = appsList.find(app => app.isFeatured === true) || appsList[0]; 
+
+        heroSection.style.background = `linear-gradient(to top, #0a0a0a 0%, transparent 100%), linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 100%), url('${featuredApp.thumbnail}')`;
+
+        const truncatedTitle = truncateText(featuredApp.title, 30);
+
+        // ডাইনামিক বাটন লজিক (প্লে-স্টোর বা অ্যাপ-স্টোর লিংক থাকলে বাটন দেখাবে)
+        let buttonsHTML = '';
+        if (featuredApp.playStoreLink && featuredApp.playStoreLink !== '#') {
+            buttonsHTML += `
+                <a href="${featuredApp.playStoreLink}" target="_blank" class="btn-store play-store">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                    Google Play
+                </a>`;
+        }
+        if (featuredApp.appStoreLink && featuredApp.appStoreLink !== '#') {
+            buttonsHTML += `
+                <a href="${featuredApp.appStoreLink}" target="_blank" class="btn-store app-store">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    App Store
+                </a>`;
+        }
+        if (!buttonsHTML) {
+            buttonsHTML = `<span class="badge-coming">Coming Soon to App Stores</span>`;
+        }
+
+        heroSection.innerHTML = `
+            <div class="hero-content">
+                <span class="badge-app">Featured App</span>
+                <h1 class="hero-title">${truncatedTitle}</h1>
+                <p class="hero-desc">${featuredApp.shortDesc}</p>
+                <div class="app-buttons">
+                    ${buttonsHTML}
+                </div>
+            </div>
+        `;
+    }
+
+    // ২. অ্যাপ গ্রিড রেন্ডার করা
+    function renderAppsGrid() {
+        const gridContainer = document.getElementById('dynamic-apps-grid');
+        gridContainer.innerHTML = ""; 
+
+        appsList.forEach(app => {
+            const opacityStyle = app.isComingSoon ? 'style="opacity: 0.7;"' : '';
+            const imgStyle = app.isComingSoon ? 'style="filter: grayscale(100%);"' : '';
+            const tagStyle = app.isComingSoon ? 'style="background: #333; color: white; border-color: #555;"' : '';
+            const linkStyle = app.isComingSoon ? 'style="color: #aaa;"' : '';
+            
+            // প্রায়োরিটি অনুযায়ী লিংক সিলেক্ট করা (প্লে স্টোর থাকলে প্লে স্টোর, না থাকলে অ্যাপ স্টোর)
+            let finalLink = '#';
+            if (app.playStoreLink && app.playStoreLink !== '#') finalLink = app.playStoreLink;
+            else if (app.appStoreLink && app.appStoreLink !== '#') finalLink = app.appStoreLink;
+
+            const playText = app.isComingSoon ? 'Coming Soon' : 'Get App ➔';
+            const truncatedCardTitle = truncateText(app.title, 25);
+
+            // প্ল্যাটফর্ম ব্যাজ তৈরি করা
+            const platformBadgesHTML = app.platforms.map(p => `<span class="platform-badge">${p}</span>`).join('');
+
+            gridContainer.innerHTML += `
+                <div class="app-card" ${opacityStyle}>
+                    <div class="card-img-wrapper">
+                        <span class="category-tag" ${tagStyle}>${app.category}</span>
+                        <img src="${app.thumbnail}" alt="${app.title}" ${imgStyle}>
+                    </div>
+                    <div class="card-content">
+                        <h3>${truncatedCardTitle}</h3>
+                        <p>${app.shortDesc}</p>
+                        
+                        <!-- প্ল্যাটফর্ম ব্যাজ লিস্ট -->
+                        <div class="platforms-list" style="margin-bottom: 20px;">
+                            ${platformBadgesHTML}
+                        </div>
+
+                        <div class="card-footer">
+                            <span style="color: #666; font-size: 0.85rem; font-weight: bold;">Mobile Tool</span>
+                            <a href="${finalLink}" target="_blank" class="get-app-link" ${linkStyle}>${playText}</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    renderAppHero();
+    renderAppsGrid();
+</script>
+
+<%- include('partials/footer') %>
