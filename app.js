@@ -20,8 +20,8 @@ app.get('/privacy', (req, res) => res.render('privacy', { title: "Privacy Policy
 app.get('/terms', (req, res) => res.render('terms', { title: "Terms & Conditions | Riverstone Games" }));
 app.get('/signin', (req, res) => {res.render('signin', { title: "Sign In | Riverstone Games" });});
 
-const PORT = 3000;
+
+const PORT = process.env.PORT || 3000; // ডাইনামিক পোর্ট সেট করা হলো
 app.listen(PORT, () => {
-    console.log(`Server is running at http://localhost:${PORT}`);
-    opener(`http://localhost:${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
