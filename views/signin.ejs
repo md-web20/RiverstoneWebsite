@@ -252,6 +252,40 @@
     const auth = firebase.auth();
 
     // ========================================================
+    // স্মার্ট টেম্পোরারি ও ফেক মেইল ব্লকার (Smart Email Blocker)
+    // ========================================================
+    const disposableEmailDomains = [
+        "yopmail.com", "mailinator.com", "tempmail.com", "temp-mail.org", "10minutemail.com",
+        "dispostable.com", "getnada.com", "boun.cr", "trashmail.com", "guerrillamail.com",
+        "sharklasers.com", "guerrillamailblock.com", "guerrillamail.net", "guerrillamail.org",
+        "guerrillamail.biz", "tempmailaddress.com", "spymail.one", "tempmail.net", "burnermail.io",
+        "temp-mail.io", "moakt.com", "disposable.com", "fakeinbox.com", "generator.email",
+        "tempmailo.com", "mailnesia.com", "mailcatch.com", "maildrop.cc", "throwawaymail.com"
+    ];
+
+    function isFakeOrTemporaryEmail(email) {
+        if (!email) return true;
+        const domain = email.split('@')[1].toLowerCase();
+        
+        // ১. ব্লকলিস্টের ডোমেইনের সাথে মিললে ব্লক করবে
+        if (disposableEmailDomains.includes(domain)) {
+            return true;
+        }
+        
+        // ২. ডোমেইনের নামের ভেতর ফেক মেইলের কোনো কি-ওয়ার্ড থাকলে স্বয়ংক্রিয় ব্লক করবে
+        if (domain.includes("temp") || 
+            domain.includes("fake") || 
+            domain.includes("disposable") || 
+            domain.includes("burner") || 
+            domain.includes("10min") || 
+            domain.includes("trashmail")) {
+            return true;
+        }
+        
+        return false;
+    }
+
+    // ========================================================
     // ফর্ম টগল ও পপ-আপ লজিক
     // ========================================================
     function toggleAuth(mode) {
@@ -319,15 +353,14 @@
     if (signInForm) {
         signInForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            const email = signInForm.querySelector('input[type="email"]').value;
-            const password = signInForm.querySelector('input[type="password"]').value;
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
 
             // ফায়ারবেস লগইন এপিআই
             auth.signInWithEmailAndPassword(email, password)
                 .then((userCredential) => {
                     triggerSuccessPopup("Access Granted. Welcome back!");
                     signInForm.reset();
-                    // ২ সেকেন্ড পর হোমপেজে রিডাইরেক্ট করবে
                     setTimeout(() => { window.location.href = "/"; }, 2000);
                 })
                 .catch((error) => {
@@ -341,20 +374,24 @@
         signUpForm.addEventListener('submit', function(e) {
             e.preventDefault();
             const name = document.getElementById('regName').value;
-            const email = document.getElementById('regEmail').value;
+            const email = document.getElementById('regEmail').value.trim();
             const password = document.getElementById('regPassword').value;
+
+            // ⚠️ ফেক বা টেম্পোরারি মেইল কিনা তা চেক করা হচ্ছে
+            if (isFakeOrTemporaryEmail(email)) {
+                triggerErrorPopup("Temporary or fake emails are not allowed! Please use a valid email.");
+                return; // অ্যাকাউন্ট ক্রিয়েশন এখানেই বন্ধ করে দেবে
+            }
 
             // ফায়ারবেস রেজিস্ট্রেশন এপিআই
             auth.createUserWithEmailAndPassword(email, password)
                 .then((userCredential) => {
                     const user = userCredential.user;
-                    // ইউজারের নাম প্রোফাইলে সেট করা
                     return user.updateProfile({ displayName: name });
                 })
                 .then(() => {
                     triggerSuccessPopup("Account Registered! Please Sign In.");
                     signUpForm.reset();
-                    // সাইন-ইন ট্যাবে নিয়ে যাবে
                     setTimeout(() => { toggleAuth('signin'); }, 1500);
                 })
                 .catch((error) => {
