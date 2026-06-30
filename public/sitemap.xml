@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <!-- ১. হোমপেজ -->
+    <url>
+        <loc>https://riverstonegames.com/</loc>
+        <lastmod>2026-06-30</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.00</priority>
+    </url>
+    <!-- ২. গেমস পেজ -->
+    <url>
+        <loc>https://riverstonegames.com/games</loc>
+        <lastmod>2026-06-30</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.90</priority>
+    </url>
+    <!-- ৩. ওয়েব পেজ -->
+    <url>
+        <loc>https://riverstonegames.com/web</loc>
+        <lastmod>2026-06-30</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.90</priority>
+    </url>
+    <!-- ৪. অ্যাপস পেজ -->
+    <url>
+        <loc>https://riverstonegames.com/apps</loc>
+        <lastmod>2026-06-30</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.90</priority>
+    </url>
+    <!-- ৫. পোর্টফোলিও পেজ -->
+    <url>
+        <loc>https://riverstonegames.com/portfolio</loc>
+        <lastmod>2026-06-30</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.80</priority>
+    </url>
+    <!-- ৬. কন্টাক্ট পেজ -->
+    <url>
+        <loc>https://riverstonegames.com/contact</loc>
+        <lastmod>2026-06-30</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.80</priority>
+    </url>
+    <!-- ৭. সাইন ইন পোর্টাল -->
+    <url>
+        <loc>https://riverstonegames.com/signin</loc>
+        <lastmod>2026-06-30</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.70</priority>
+    </url>
+    <!-- ৮. এবাউট আস -->
+    <url>
+        <loc>https://riverstonegames.com/about</loc>
+        <lastmod>2026-06-30</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.70</priority>
+    </url>
+    <!-- ৯. প্রাইভেসি পলিসি -->
+    <url>
+        <loc>https://riverstonegames.com/privacy</loc>
+        <lastmod>2026-06-30</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.70</priority>
+    </url>
+    <!-- ১০. টার্মস অফ সার্ভিস -->
+    <url>
+        <loc>https://riverstonegames.com/terms</loc>
+        <lastmod>2026-06-30</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.70</priority>
+    </url>
+</urlset>
