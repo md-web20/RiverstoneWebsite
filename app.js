@@ -19,7 +19,11 @@ app.get('/about', (req, res) => res.render('about', { title: "About Us | Riverst
 app.get('/privacy', (req, res) => res.render('privacy', { title: "Privacy Policy | Riverstone Games" }));
 app.get('/terms', (req, res) => res.render('terms', { title: "Terms & Conditions | Riverstone Games" }));
 app.get('/signin', (req, res) => {res.render('signin', { title: "Sign In | Riverstone Games" });});
-
+// 🎯 গুগল অ্যাডমব ভেরিফিকেশনের জন্য সরাসরি ডাইনামিক রাউট
+app.get('/app-ads.txt', (req, res) => {
+    res.type('text/plain');
+    res.send('google.com, pub-5281833840576429, DIRECT, f08c47fec0942fa0');
+});
 
 const PORT = process.env.PORT || 3000; // ডাইনামিক পোর্ট সেট করা হলো
 app.listen(PORT, () => {
