@@ -25,6 +25,11 @@ app.get('/app-ads.txt', (req, res) => {
     res.send('google.com, pub-5281833840576429, DIRECT, f08c47fec0942fa0');
 });
 
+app.get('/robots.txt', (req, res) => {
+    res.type('text/plain');
+    res.send("User-agent: *\nAllow: /\n\nUser-agent: Mediapartners-Google\nAllow: /\n\nUser-agent: Googlebot\nAllow: /");
+});
+
 const PORT = process.env.PORT || 3000; // ডাইনামিক পোর্ট সেট করা হলো
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
